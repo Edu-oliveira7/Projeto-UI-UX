@@ -1,0 +1,125 @@
+
+:root {
+    --primary-color: #043480;
+    --secondary-color: #FFFFFF;
+    --tertiary-color: #DB561D;
+    --logo-accent: #FFE4C5;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+}
+
+.brand-logo {
+    font-family: 'Rampart One', cursive;
+    font-size: 3rem;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 0 var(--logo-accent),
+                -1px -1px 0 var(--logo-accent),
+                1px -1px 0 var(--logo-accent),
+                -1px 1px 0 var(--logo-accent);
+    line-height: 1;
+}
+
+.brand-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--tertiary-color);
+    margin-top: -0.5rem;
+    margin-left: 0.5rem;
+    letter-spacing: 1px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.color-swatch {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    display: inline-block;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+}
+
+.primary-color {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.secondary-color {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: 1px solid #ddd;
+}
+
+.tertiary-color {
+    background-color: var(--tertiary-color);
+    color: white;
+}
+
+.logo-accent {
+    background-color: var(--logo-accent);
+    color: var(--primary-color);
+}
+
+.typography-example {
+    border-left: 4px solid var(--tertiary-color);
+    padding-left: 15px;
+    margin: 20px 0;
+    background-color: white;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.btn-brand {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.btn-brand:hover {
+    background-color: #032a6b;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--tertiary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #c04b1a;
+    color: white;
+}
+
+.section-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    color: white;
+    margin-bottom: 0;
+}
+
+.logo-container {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 2rem;
+}
