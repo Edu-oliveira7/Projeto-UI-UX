@@ -1,84 +1,133 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SigEduc</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGEduc - Início</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a2e0ad6c58.js" crossorigin="anonymous"></script>
 </head>
+<body class="bg-gray-100 font-sans">
 
-<body class="h-screen flex">
+  <!-- Header -->
+  <header class="flex justify-between items-center px-6 py-3 bg-gray-200 shadow">
+    <div class="flex items-center space-x-4">
+      <!-- Botão hamburguer -->
+      <button id="menuButton" class="text-gray-700 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
 
-    <!-- Lado esquerdo - Formulário -->
-    <div class="w-full md:w-1/2 flex flex-col justify-center items-center px-10 md:px-24 bg-white text-center">
-
-        <!-- Logo centralizada -->
-        <div class="mb-10 flex justify-center">
-            <img src="img/Group 18.png" alt="Logo SigEduc" class="w-56">
-        </div>
-
-        <!-- Saudação -->
-        <h1 class="text-3xl font-semibold mb-2 flex items-center justify-center gap-2">
-            Olá! <span>👋</span>
-        </h1>
-        <p class="text-gray-600 mb-8">Use suas credenciais para acessar o SigEduc.</p>
-
-        <!-- Formulário -->
-        <form class="w-full max-w-md space-y-6">
-            <div>
-                <input type="text" placeholder="Usuário"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div class="relative">
-                <input id="senha" type="password" placeholder="Senha"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <!-- Ícone olho -->
-                <span id="toggleSenha" class="absolute right-4 top-3.5 cursor-pointer text-gray-500">
-                    👁️
-                </span>
-            </div>
-
-            <div class="text-right">
-                <a href="#" class="text-blue-600 text-sm hover:underline">Esqueci a senha</a>
-            </div>
-
-            <button type="submit"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2">
-                Entrar
-            </button>
-        </form>
+      <!-- Logo -->
+      <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-36 object-contain">
     </div>
 
-    <!-- Lado direito - Imagem com gradiente -->
-    <div class="hidden md:flex w-1/2 relative">
-        <img src="img/estudante.jfif" alt="Imagem SigEduc" class="absolute inset-0 w-full h-full object-cover">
-        <div class="absolute inset-0 bg-blue-700 bg-opacity-60"></div>
-
-        <!-- Conteúdo centralizado no rodapé -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
-            <img src="img/Brasão_do_Rio_Grande_do_Norte.svg.png"
-                alt="Logo RN" class="w-24 mx-auto mb-3 opacity-90">
-
-            <h2 class="text-6xl font-bold leading-tight">RN <span class="font-light">SEEC</span></h2>
-            <p class="text-sm opacity-90">
-                SECRETARIA DE ESTADO DA EDUCAÇÃO, DO ESPORTE E DO LAZER - SEEC
-            </p>
-            <p class="text-xs opacity-80 mt-1">
-                SIGEduc | GPD/SEEC - (84) 4008-4088 / Opção 1<br>
-                -sigeduc.app3.srv3inst1 v20251020_1709
-            </p>
-        </div>
+    <div class="flex items-center space-x-3">
+      <button class="bg-gray-400 text-white px-6 py-1.5 rounded-full hover:bg-gray-500 transition">Aluno</button>
+      <button class="bg-gray-400 text-white px-6 py-1.5 rounded-full hover:bg-gray-500 transition">Sair</button>
     </div>
-    <!-- Script para mostrar/ocultar senha -->
-    <script>
-        const senha = document.getElementById("senha");
-        const toggle = document.getElementById("toggleSenha");
-        toggle.addEventListener("click", () => {
-            senha.type = senha.type === "password" ? "text" : "password";
-        });
-    </script>
+  </header>
+
+  <!-- Menu lateral (oculto por padrão) -->
+  <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-200 shadow-md transform -translate-x-full transition-transform duration-300 z-10">
+    <div class="p-6">
+      <!-- Usuário -->
+      <div class="bg-gray-400 text-white px-4 py-2 mb-6 flex items-center rounded">
+        <i class="fas fa-user mr-2"></i> Usuario
+      </div>
+
+      <h2 class="text-2xl font-bold mb-4">Menu</h2>
+      
+      <!-- Botão Buscar -->
+      <div class="mb-5">
+        <button class="w-full bg-gray-100 border border-gray-600 py-1 font-semibold hover:bg-gray-300 rounded">
+          Buscar
+        </button>
+      </div>
+      
+      <ul class="space-y-3">
+        <li><a href="index.html" class="block text-gray-700 hover:text-blue-600 font-medium">Início</a></li>
+        <li>
+          <details class="group">
+            <summary class="flex justify-between items-center cursor-pointer text-gray-700 hover:text-blue-600">
+              <span class="font-semibold">Ensino</span>
+              <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <ul class="ml-4 mt-2 space-y-2">
+              <li><a href="boletim.html" class="block text-gray-600 hover:text-blue-600">Boletim</a></li>
+              <li><a href="historico.html" class="block text-gray-600 hover:text-blue-600">Histórico</a></li>
+              <li><a href="disciplinas.html" class="block text-gray-600 hover:text-blue-600">Minhas Disciplinas</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="group">
+            <summary class="flex justify-between items-center cursor-pointer text-gray-700 hover:text-blue-600">
+              <span class="font-semibold">Serviços</span>
+              <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <ul class="ml-4 mt-2 space-y-2">
+              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Solicitações</a></li>
+              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Atestados</a></li>
+              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Transferências</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a href="mensagens.html" class="block text-gray-700 hover:text-blue-600 font-semibold">Caixa de Mensagens</a></li>
+      </ul>
+      
+      <!-- Botão Sair -->
+      <button class="w-full bg-gray-700 text-white px-6 py-2 rounded text-center hover:bg-gray-800 mt-10">Sair</button>
+    </div>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="p-8">
+    <h2 class="text-3xl font-bold text-center">Olá Aluno, Bem-vindo ao <span class="text-blue-700">SIGEduc</span></h2>
+    <p class="mt-2 font-semibold text-center">Segunda-feira, 11/08/2025</p>
+    <p class="mt-4 text-lg font-bold text-center">Você possui 2 novas mensagens</p>
+
+    <!-- Cards -->
+    <div class="flex gap-10 mt-10 justify-center">
+      <div class="bg-gray-300 p-8 w-64 rounded text-center shadow-md">
+        <h3 class="font-bold text-lg">Boletim</h3>
+        <p class="mt-2 text-sm">Últimas notas lançadas</p>
+        <button class="mt-4 bg-white text-black px-4 py-1 rounded-full shadow hover:bg-gray-100">Ver mais</button>
+      </div>
+
+      <div class="bg-gray-300 p-8 w-64 rounded text-center shadow-md">
+        <h3 class="font-bold text-lg">Mensagens</h3>
+        <p class="mt-2 text-sm">Você possui 2 novas mensagens</p>
+        <button class="mt-4 bg-white text-black px-4 py-1 rounded-full shadow hover:bg-gray-100">Ver mais</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script para abrir/fechar menu -->
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const sidebar = document.getElementById('sidebar');
+    
+    menuButton.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+    });
+    
+    // Fechar menu ao clicar fora dele
+    document.addEventListener('click', (event) => {
+      const isClickInsideSidebar = sidebar.contains(event.target);
+      const isClickInsideMenuButton = menuButton.contains(event.target);
+      
+      if (!isClickInsideSidebar && !isClickInsideMenuButton && !sidebar.classList.contains('-translate-x-full')) {
+        sidebar.classList.add('-translate-x-full');
+      }
+    });
+  </script>
 
 </body>
-
 </html>

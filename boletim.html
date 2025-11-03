@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boletim - SIGEduc</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a2e0ad6c58.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center px-6 py-3 bg-gray-200 shadow">
+    <div class="flex items-center space-x-4">
+      <!-- Botão hamburguer -->
+      <button id="menuButton" class="text-gray-700 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Logo -->
+      <div class="flex items-center">
+        <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-36 object-contain">
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-3">
+      <div class="text-sm text-gray-700">
+        Logado<br>
+        <span class="font-semibold">Aluno</span>
+      </div>
+      <button class="bg-gray-400 text-white px-6 py-1.5 rounded-full hover:bg-gray-500 transition">Logout</button>
+    </div>
+  </header>
+
+  <!-- Menu lateral (oculto por padrão) -->
+  <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-200 shadow-md transform -translate-x-full transition-transform duration-300 z-10">
+    <div class="p-6">
+      <!-- Usuário -->
+      <div class="bg-gray-400 text-white px-4 py-2 mb-6 flex items-center rounded">
+        <i class="fas fa-user mr-2"></i> Usuario
+      </div>
+
+      <h2 class="text-2xl font-bold mb-4">Menu</h2>
+      
+      <!-- Botão Buscar -->
+      <div class="mb-5">
+        <button class="w-full bg-gray-100 border border-gray-600 py-1 font-semibold hover:bg-gray-300 rounded">
+          Buscar
+        </button>
+      </div>
+      
+      <ul class="space-y-3">
+        <li><a href="index.html" class="block text-gray-700 hover:text-blue-600">Início</a></li>
+        <li>
+          <details class="group" open>
+            <summary class="flex justify-between items-center cursor-pointer text-gray-700 hover:text-blue-600">
+              <span class="font-semibold">Ensino</span>
+              <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <ul class="ml-4 mt-2 space-y-2">
+              <li><a href="boletim.html" class="block text-blue-600 font-medium">Boletim</a></li>
+              <li><a href="historico.html" class="block text-gray-600 hover:text-blue-600">Histórico</a></li>
+              <li><a href="disciplinas.html" class="block text-gray-600 hover:text-blue-600">Minhas Disciplinas</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="group">
+            <summary class="flex justify-between items-center cursor-pointer text-gray-700 hover:text-blue-600">
+              <span class="font-semibold">Serviços</span>
+              <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <ul class="ml-4 mt-2 space-y-2">
+              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Solicitações</a></li>
+              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Atestados</a></li>
+              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Transferências</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a href="mensagens.html" class="block text-gray-700 hover:text-blue-600">Caixa de Mensagens</a></li>
+      </ul>
+      
+      <!-- Botão Sair -->
+      <button class="w-full bg-gray-700 text-white px-6 py-2 rounded text-center hover:bg-gray-800 mt-10">Sair</button>
+    </div>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="p-8">
+    <!-- Cabeçalho do Boletim -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div class="flex justify-between items-start">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-800">Milleny Jamily</h1>
+          <h2 class="text-xl font-semibold text-gray-600 mt-1">9º Ano - 2024</h2>
+          <div class="mt-4 grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p><span class="font-semibold">Escola:</span> Escola Municipal Dinarte Marinho</p>
+              <p><span class="font-semibold">Turma:</span> 9º Ano A</p>
+            </div>
+            <div>
+              <p><span class="font-semibold">Período:</span> 1º Trimestre</p>
+              <p><span class="font-semibold">Data de Emissão:</span> 15/04/2024</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-right">
+          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mb-2">
+            <i class="fas fa-download mr-2"></i>Baixar Boletim
+          </button>
+          <div class="text-sm text-gray-600">
+            <p>Status: <span class="font-semibold text-green-600">Aprovado</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabela de Notas -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-300">
+          <thead class="bg-gray-200">
+            <tr>
+              <th class="py-3 px-4 text-left font-semibold border border-gray-300">Disciplina</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Total de Aulas</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Total de Faltas</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Situação</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Frequência</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Nota 1</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Nota 2</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Nota 3</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Nota 4</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Média</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">NF</th>
+              <th class="py-3 px-4 text-center font-semibold border border-gray-300">MFD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Português -->
+            <tr class="hover:bg-gray-50">
+              <td class="py-3 px-4 border border-gray-300 font-medium">Português</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">80</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">2</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">
+                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Aprovado</span>
+              </td>
+              <td class="py-3 px-4 border border-gray-300 text-center font-semibold text-green-600">97.5%</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">9.5</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.8</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">9.2</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+              <td class="py-3 px-4 border border-gray-300 text-center font-semibold">9.2</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">9.2</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+            </tr>
+            <!-- Matemática -->
+            <tr class="hover:bg-gray-50">
+              <td class="py-3 px-4 border border-gray-300 font-medium">Matemática</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">80</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">1</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">
+                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Aprovado</span>
+              </td>
+              <td class="py-3 px-4 border border-gray-300 text-center font-semibold text-green-600">98.8%</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.5</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">9.0</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.7</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+              <td class="py-3 px-4 border border-gray-300 text-center font-semibold">8.7</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.7</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+            </tr>
+            <!-- História -->
+            <tr class="hover:bg-gray-50">
+              <td class="py-3 px-4 border border-gray-300 font-medium">História</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">60</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">0</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">
+                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Aprovado</span>
+              </td>
+              <td class="py-3 px-4 border border-gray-300 text-center font-semibold text-green-600">100%</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">9.0</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.5</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">9.2</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+              <td class="py-3 px-4 border border-gray-300 text-center font-semibold">8.9</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.9</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+            </tr>
+            <!-- Geografia -->
+            <tr class="hover:bg-gray-50">
+              <td class="py-3 px-4 border border-gray-300 font-medium">Geografia</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">60</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">3</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">
+                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Aprovado</span>
+              </td>
+              <td class="py-3 px-4 border border-gray-300 text-center font-semibold text-green-600">95%</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">7.5</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.0</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.5</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+              <td class="py-3 px-4 border border-gray-300 text-center font-semibold">8.0</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.0</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+            </tr>
+            <!-- Ciências -->
+            <tr class="hover:bg-gray-50">
+              <td class="py-3 px-4 border border-gray-300 font-medium">Ciências</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">80</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">2</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">
+                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Aprovado</span>
+              </td>
+              <td class="py-3 px-4 border border-gray-300 text-center font-semibold text-green-600">97.5%</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.8</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">9.2</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.5</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+              <td class="py-3 px-4 border border-gray-300 text-center font-semibold">8.8</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">8.8</td>
+              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Resumo Geral -->
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-white rounded-lg shadow-md p-4">
+        <h3 class="font-semibold text-lg mb-2">Média Geral</h3>
+        <p class="text-2xl font-bold text-blue-600">8.72</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-md p-4">
+        <h3 class="font-semibold text-lg mb-2">Frequência Geral</h3>
+        <p class="text-2xl font-bold text-green-600">97.8%</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-md p-4">
+        <h3 class="font-semibold text-lg mb-2">Situação</h3>
+        <p class="text-xl font-bold text-green-600">Aprovado</p>
+      </div>
+    </div>
+
+    <!-- Legenda -->
+    <div class="mt-6 bg-white rounded-lg shadow-md p-4">
+      <h3 class="font-semibold text-lg mb-2">Legenda</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+        <p><span class="font-semibold">NF:</span> Nota Final</p>
+        <p><span class="font-semibold">MFD:</span> Média Final para Aprovação</p>
+        <p><span class="font-semibold">Média Mínima:</span> 7.0</p>
+        <p><span class="font-semibold">Frequência Mínima:</span> 75%</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script para abrir/fechar menu -->
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const sidebar = document.getElementById('sidebar');
+    
+    menuButton.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+    });
+    
+    // Fechar menu ao clicar fora dele
+    document.addEventListener('click', (event) => {
+      const isClickInsideSidebar = sidebar.contains(event.target);
+      const isClickInsideMenuButton = menuButton.contains(event.target);
+      
+      if (!isClickInsideSidebar && !isClickInsideMenuButton && !sidebar.classList.contains('-translate-x-full')) {
+        sidebar.classList.add('-translate-x-full');
+      }
+    });
+  </script>
+
+</body>
+</html>

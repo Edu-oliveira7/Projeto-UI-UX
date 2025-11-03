@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico Escolar - SIGEduc</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a2e0ad6c58.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center px-6 py-3 bg-gray-200 shadow">
+    <div class="flex items-center space-x-4">
+      <!-- Botão hamburguer -->
+      <button id="menuButton" class="text-gray-700 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Logo -->
+      <div class="flex items-center">
+        <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-36 object-contain">
+        <span class="ml-2 text-sm font-medium">Nome da cidade na logo</span>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-3">
+      <div class="text-sm text-gray-700">
+        Logado<br>
+        <span class="font-semibold">Aluno</span>
+      </div>
+      <button class="bg-gray-400 text-white px-6 py-1.5 rounded-full hover:bg-gray-500 transition">Logout</button>
+    </div>
+  </header>
+
+  <!-- Menu lateral (oculto por padrão) -->
+  <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-200 shadow-md transform -translate-x-full transition-transform duration-300 z-10">
+    <div class="p-6">
+      <!-- Usuário -->
+      <div class="bg-gray-400 text-white px-4 py-2 mb-6 flex items-center rounded">
+        <i class="fas fa-user mr-2"></i> Usuario
+      </div>
+
+      <h2 class="text-2xl font-bold mb-4">Menu</h2>
+      
+      <!-- Botão Buscar -->
+      <div class="mb-5">
+        <button class="w-full bg-gray-100 border border-gray-600 py-1 font-semibold hover:bg-gray-300 rounded">
+          Buscar
+        </button>
+      </div>
+      
+      <ul class="space-y-3">
+        <li><a href="index.html" class="block text-gray-700 hover:text-blue-600">Início</a></li>
+        <li>
+          <details class="group">
+            <summary class="flex justify-between items-center cursor-pointer text-gray-700 hover:text-blue-600">
+              <span class="font-semibold">Ensino</span>
+              <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <ul class="ml-4 mt-2 space-y-2">
+              <li><a href="boletim.html" class="block text-gray-600 hover:text-blue-600">Boletim</a></li>
+              <li><a href="historico.html" class="block text-blue-600 font-medium">Histórico</a></li>
+              <li><a href="disciplinas.html" class="block text-gray-600 hover:text-blue-600">Minhas Disciplinas</a></li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details class="group">
+            <summary class="flex justify-between items-center cursor-pointer text-gray-700 hover:text-blue-600">
+              <span class="font-semibold">Serviços</span>
+              <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <ul class="ml-4 mt-2 space-y-2">
+              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Solicitações</a></li>
+              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Atestados</a></li>
+              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Transferências</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a href="mensagens.html" class="block text-gray-700 hover:text-blue-600">Caixa de Mensagens</a></li>
+      </ul>
+      
+      <!-- Botão Sair -->
+      <button class="w-full bg-gray-700 text-white px-6 py-2 rounded text-center hover:bg-gray-800 mt-10">Sair</button>
+    </div>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="p-8">
+    <h1 class="text-3xl font-bold text-center mb-8">Histórico Escolar</h1>
+    
+    <!-- Seletor de Período -->
+    <div class="max-w-md mx-auto mb-10">
+      <label for="periodo" class="block text-lg font-medium text-gray-700 mb-2 text-center">Selecione o período</label>
+      <select id="periodo" class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        <option value="">Todos os períodos</option>
+        <option value="2023-2025">2023 - 2025</option>
+        <option value="2019-2022">2019 - 2022</option>
+      </select>
+    </div>
+
+    <!-- Histórico 2023-2025 -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">2023 - 2025</h2>
+        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">IFRN</span>
+      </div>
+      
+      <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-300">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="py-2 px-4 text-left font-semibold border">Disciplina</th>
+              <th class="py-2 px-4 text-left font-semibold border">Carga Horária</th>
+              <th class="py-2 px-4 text-left font-semibold border">Nota</th>
+              <th class="py-2 px-4 text-left font-semibold border">Situação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-4 border">Matemática</td>
+              <td class="py-2 px-4 border">160h</td>
+              <td class="py-2 px-4 border">8.5</td>
+              <td class="py-2 px-4 border"><span class="text-green-600 font-medium">Aprovado</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-4 border">Português</td>
+              <td class="py-2 px-4 border">160h</td>
+              <td class="py-2 px-4 border">9.2</td>
+              <td class="py-2 px-4 border"><span class="text-green-600 font-medium">Aprovado</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-4 border">História</td>
+              <td class="py-2 px-4 border">80h</td>
+              <td class="py-2 px-4 border">7.8</td>
+              <td class="py-2 px-4 border"><span class="text-green-600 font-medium">Aprovado</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-4 border">Geografia</td>
+              <td class="py-2 px-4 border">80h</td>
+              <td class="py-2 px-4 border">8.0</td>
+              <td class="py-2 px-4 border"><span class="text-green-600 font-medium">Aprovado</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-4 border">Ciências</td>
+              <td class="py-2 px-4 border">120h</td>
+              <td class="py-2 px-4 border">8.7</td>
+              <td class="py-2 px-4 border"><span class="text-green-600 font-medium">Aprovado</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="mt-4 flex justify-between items-center">
+        <div class="text-sm text-gray-600">
+          <p><strong>Média Geral:</strong> 8.44</p>
+          <p><strong>Frequência:</strong> 92%</p>
+        </div>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+          <i class="fas fa-download mr-2"></i>Baixar Histórico
+        </button>
+      </div>
+    </div>
+
+    <!-- Histórico 2019-2022 -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">2019 - 2022</h2>
+        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Dinarte Marinho</span>
+      </div>
+      
+      <div class="overflow-x-auto">
+        <table class="min-w-full border border-gray-300">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="py-2 px-4 text-left font-semibold border">Disciplina</th>
+              <th class="py-2 px-4 text-left font-semibold border">Carga Horária</th>
+              <th class="py-2 px-4 text-left font-semibold border">Nota</th>
+              <th class="py-2 px-4 text-left font-semibold border">Situação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-4 border">Matemática</td>
+              <td class="py-2 px-4 border">160h</td>
+              <td class="py-2 px-4 border">7.5</td>
+              <td class="py-2 px-4 border"><span class="text-green-600 font-medium">Aprovado</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-4 border">Português</td>
+              <td class="py-2 px-4 border">160h</td>
+              <td class="py-2 px-4 border">8.0</td>
+              <td class="py-2 px-4 border"><span class="text-green-600 font-medium">Aprovado</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-4 border">História</td>
+              <td class="py-2 px-4 border">80h</td>
+              <td class="py-2 px-4 border">6.9</td>
+              <td class="py-2 px-4 border"><span class="text-green-600 font-medium">Aprovado</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-4 border">Geografia</td>
+              <td class="py-2 px-4 border">80h</td>
+              <td class="py-2 px-4 border">7.2</td>
+              <td class="py-2 px-4 border"><span class="text-green-600 font-medium">Aprovado</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-4 border">Ciências</td>
+              <td class="py-2 px-4 border">120h</td>
+              <td class="py-2 px-4 border">8.1</td>
+              <td class="py-2 px-4 border"><span class="text-green-600 font-medium">Aprovado</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="mt-4 flex justify-between items-center">
+        <div class="text-sm text-gray-600">
+          <p><strong>Média Geral:</strong> 7.54</p>
+          <p><strong>Frequência:</strong> 89%</p>
+        </div>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+          <i class="fas fa-download mr-2"></i>Baixar Histórico
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script para abrir/fechar menu -->
+  <script>
+    const menuButton = document.getElementById('menuButton');
+    const sidebar = document.getElementById('sidebar');
+    
+    menuButton.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+    });
+    
+    // Fechar menu ao clicar fora dele
+    document.addEventListener('click', (event) => {
+      const isClickInsideSidebar = sidebar.contains(event.target);
+      const isClickInsideMenuButton = menuButton.contains(event.target);
+      
+      if (!isClickInsideSidebar && !isClickInsideMenuButton && !sidebar.classList.contains('-translate-x-full')) {
+        sidebar.classList.add('-translate-x-full');
+      }
+    });
+
+    // Filtro por período
+    const periodoSelect = document.getElementById('periodo');
+    periodoSelect.addEventListener('change', function() {
+      const periodoSelecionado = this.value;
+      
+      // Aqui você implementaria a lógica para filtrar os históricos
+      // Por enquanto, apenas mostra um alerta
+      if (periodoSelecionado) {
+        alert(`Filtrando por período: ${periodoSelecionado}`);
+      } else {
+        alert('Mostrando todos os períodos');
+      }
+    });
+  </script>
+
+</body>
+</html>
