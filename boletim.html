@@ -6,227 +6,376 @@
   <title>Boletim - SIGEduc</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://kit.fontawesome.com/a2e0ad6c58.js" crossorigin="anonymous"></script>
+  <style>
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    .grade-cell {
+      transition: all 0.2s ease;
+    }
+    .grade-cell:hover {
+      background-color: #f0f9ff;
+      transform: scale(1.05);
+    }
+    .progress-bar {
+      transition: width 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    .sidebar-open {
+      overflow: hidden;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gradient-to-br from-blue-50 to-gray-100 font-sans min-h-screen">
 
   <!-- Header -->
-  <header class="flex justify-between items-center px-6 py-3 bg-gray-200 shadow">
-    <div class="flex items-center space-x-4">
-      <!-- Botão hamburguer -->
-      <button id="menuButton" class="text-gray-700 focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+  <header class="bg-white shadow-sm border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center space-x-4">
+          <!-- Botão hamburguer -->
+          <button id="menuButton" class="text-gray-600 hover:text-blue-600 focus:outline-none transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
 
-      <!-- Logo -->
-      <div class="flex items-center">
-        <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-36 object-contain">
-      </div>
-    </div>
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-40 object-contain">
+          </div>
+        </div>
 
-    <div class="flex items-center space-x-3">
-      <div class="text-sm text-gray-700">
-        Logado<br>
-        <span class="font-semibold">Aluno</span>
+        <div class="flex items-center space-x-4">
+          <!-- Notificações -->
+          <div class="relative">
+            <button class="text-gray-500 hover:text-blue-600 transition-colors p-2 rounded-full hover:bg-blue-50">
+              <i class="fas fa-bell text-xl"></i>
+              <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+            </button>
+          </div>
+          
+          <!-- Perfil do Aluno -->
+          <div class="flex items-center space-x-3">
+            <div class="text-right hidden sm:block">
+              <p class="text-sm text-gray-600">Olá, <span class="font-medium">Milleny Jamily</span></p>
+              <p class="text-xs text-gray-500">9º Ano - Matutino</p>
+            </div>
+            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
+              MJ
+            </div>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
+              Sair
+            </button>
+          </div>
+        </div>
       </div>
-      <button class="bg-gray-400 text-white px-6 py-1.5 rounded-full hover:bg-gray-500 transition">Logout</button>
     </div>
   </header>
 
   <!-- Menu lateral (oculto por padrão) -->
-  <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-200 shadow-md transform -translate-x-full transition-transform duration-300 z-10">
-    <div class="p-6">
+  <aside id="sidebar" class="fixed top-0 left-0 w-80 h-full bg-white shadow-xl transform -translate-x-full transition-transform duration-300 z-20">
+    <div class="p-6 h-full flex flex-col">
       <!-- Usuário -->
-      <div class="bg-gray-400 text-white px-4 py-2 mb-6 flex items-center rounded">
-        <i class="fas fa-user mr-2"></i> Usuario
+      <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 mb-6 rounded-xl flex items-center space-x-3">
+        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+          <i class="fas fa-user text-xl"></i>
+        </div>
+        <div>
+          <h3 class="font-bold">Milleny Jamily</h3>
+          <p class="text-sm opacity-90">9º Ano - Escola Municipal Dinarte Marinho</p>
+        </div>
       </div>
 
-      <h2 class="text-2xl font-bold mb-4">Menu</h2>
+      <h2 class="text-xl font-bold mb-6 text-gray-800 border-b pb-2">Menu Principal</h2>
       
       <!-- Botão Buscar -->
-      <div class="mb-5">
-        <button class="w-full bg-gray-100 border border-gray-600 py-1 font-semibold hover:bg-gray-300 rounded">
-          Buscar
-        </button>
+      <div class="mb-6 relative">
+        <input type="text" placeholder="Buscar..." class="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+        <i class="fas fa-search absolute right-4 top-3.5 text-gray-400"></i>
       </div>
       
-      <ul class="space-y-3">
-        <li><a href="index.html" class="block text-gray-700 hover:text-blue-600">Início</a></li>
-        <li>
-          <details class="group" open>
-            <summary class="flex justify-between items-center cursor-pointer text-gray-700 hover:text-blue-600">
-              <span class="font-semibold">Ensino</span>
-              <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </summary>
-            <ul class="ml-4 mt-2 space-y-2">
-              <li><a href="boletim.html" class="block text-blue-600 font-medium">Boletim</a></li>
-              <li><a href="historico.html" class="block text-gray-600 hover:text-blue-600">Histórico</a></li>
-              <li><a href="disciplinas.html" class="block text-gray-600 hover:text-blue-600">Minhas Disciplinas</a></li>
-            </ul>
-          </details>
-        </li>
-        <li>
-          <details class="group">
-            <summary class="flex justify-between items-center cursor-pointer text-gray-700 hover:text-blue-600">
-              <span class="font-semibold">Serviços</span>
-              <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </summary>
-            <ul class="ml-4 mt-2 space-y-2">
-              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Solicitações</a></li>
-              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Atestados</a></li>
-              <li><a href="#" class="block text-gray-600 hover:text-blue-600">Transferências</a></li>
-            </ul>
-          </details>
-        </li>
-        <li><a href="mensagens.html" class="block text-gray-700 hover:text-blue-600">Caixa de Mensagens</a></li>
-      </ul>
+      <nav class="flex-1">
+        <ul class="space-y-2">
+          <li>
+            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-home w-5 text-center"></i>
+              <span>Início</span>
+            </a>
+          </li>
+          <li>
+            <details class="group" open>
+              <summary class="flex justify-between items-center cursor-pointer px-4 py-3 bg-blue-50 text-blue-600 rounded-lg font-medium">
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-graduation-cap w-5 text-center"></i>
+                  <span>Ensino</span>
+                </div>
+                <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="ml-8 mt-2 space-y-2">
+                <li><a href="boletim.html" class="block px-4 py-2 bg-blue-100 text-blue-600 rounded font-medium">Boletim</a></li>
+                <li><a href="historico.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Histórico</a></li>
+                <li><a href="disciplinas.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Minhas Disciplinas</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details class="group">
+              <summary class="flex justify-between items-center cursor-pointer px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-concierge-bell w-5 text-center"></i>
+                  <span>Serviços</span>
+                </div>
+                <svg class="w-4 h-4 transition-transform group-open:rotate-180 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="ml-8 mt-2 space-y-2">
+                <li><a href="#" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Solicitações</a></li>
+                <li><a href="#" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Atestados</a></li>
+                <li><a href="#" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Transferências</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <a href="mensagens.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-envelope w-5 text-center"></i>
+              <span>Caixa de Mensagens</span>
+              <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">2</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
       
       <!-- Botão Sair -->
-      <button class="w-full bg-gray-700 text-white px-6 py-2 rounded text-center hover:bg-gray-800 mt-10">Sair</button>
+      <button class="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white px-6 py-3 rounded-lg text-center hover:from-gray-700 hover:to-gray-800 transition-all mt-6 font-medium flex items-center justify-center space-x-2">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Sair do Sistema</span>
+      </button>
     </div>
   </aside>
 
+  <!-- Overlay para fechar menu -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden"></div>
+
   <!-- Conteúdo principal -->
-  <main class="p-8">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Cabeçalho do Boletim -->
-    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-      <div class="flex justify-between items-start">
-        <div>
-          <h1 class="text-2xl font-bold text-gray-800">Milleny Jamily</h1>
-          <h2 class="text-xl font-semibold text-gray-600 mt-1">9º Ano - 2024</h2>
-          <div class="mt-4 grid grid-cols-2 gap-4 text-sm">
-            <div>
-              <p><span class="font-semibold">Escola:</span> Escola Municipal Dinarte Marinho</p>
-              <p><span class="font-semibold">Turma:</span> 9º Ano A</p>
+    <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover fade-in">
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+        <div class="flex-1">
+          <div class="flex items-center space-x-4 mb-4">
+            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white">
+              <i class="fas fa-chart-bar text-2xl"></i>
             </div>
             <div>
-              <p><span class="font-semibold">Período:</span> 1º Trimestre</p>
-              <p><span class="font-semibold">Data de Emissão:</span> 15/04/2024</p>
+              <h1 class="text-3xl font-bold text-gray-800">Milleny Jamily</h1>
+              <h2 class="text-xl font-semibold text-gray-600">9º Ano - 2024</h2>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div class="space-y-2">
+              <p class="flex items-center space-x-2">
+                <i class="fas fa-school text-blue-500 w-5"></i>
+                <span><strong>Escola:</strong> Escola Municipal Dinarte Marinho</span>
+              </p>
+              <p class="flex items-center space-x-2">
+                <i class="fas fa-users text-blue-500 w-5"></i>
+                <span><strong>Turma:</strong> 9º Ano A - Matutino</span>
+              </p>
+            </div>
+            <div class="space-y-2">
+              <p class="flex items-center space-x-2">
+                <i class="fas fa-calendar-alt text-blue-500 w-5"></i>
+                <span><strong>Período:</strong> 1º Trimestre</span>
+              </p>
+              <p class="flex items-center space-x-2">
+                <i class="fas fa-clock text-blue-500 w-5"></i>
+                <span><strong>Emissão:</strong> 15/04/2024</span>
+              </p>
             </div>
           </div>
         </div>
-        <div class="text-right">
-          <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition mb-2">
-            <i class="fas fa-download mr-2"></i>Baixar Boletim
-          </button>
-          <div class="text-sm text-gray-600">
-            <p>Status: <span class="font-semibold text-green-600">Aprovado</span></p>
+        
+        <div class="text-center lg:text-right space-y-4">
+          <div class="inline-flex flex-col items-center lg:items-end space-y-2">
+            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium flex items-center space-x-2">
+              <i class="fas fa-check-circle"></i>
+              <span>Status: Aprovado</span>
+            </span>
+            <button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2">
+              <i class="fas fa-download"></i>
+              <span>Baixar Boletim</span>
+            </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtros e Período -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover fade-in">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <h3 class="text-xl font-bold text-gray-800 flex items-center space-x-2">
+          <i class="fas fa-filter text-blue-500"></i>
+          <span>Filtrar por Período</span>
+        </h3>
+        <div class="flex flex-wrap gap-3">
+          <button class="px-4 py-2 bg-blue-500 text-white rounded-lg font-medium transition-colors">1º Trimestre</button>
+          <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors">2º Trimestre</button>
+          <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors">3º Trimestre</button>
+          <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors">Anual</button>
         </div>
       </div>
     </div>
 
     <!-- Tabela de Notas -->
-    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden mb-8 fade-in">
       <div class="overflow-x-auto">
-        <table class="min-w-full border border-gray-300">
-          <thead class="bg-gray-200">
+        <table class="min-w-full">
+          <thead class="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
             <tr>
-              <th class="py-3 px-4 text-left font-semibold border border-gray-300">Disciplina</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Total de Aulas</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Total de Faltas</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Situação</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Frequência</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Nota 1</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Nota 2</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Nota 3</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Nota 4</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">Média</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">NF</th>
-              <th class="py-3 px-4 text-center font-semibold border border-gray-300">MFD</th>
+              <th class="py-4 px-4 text-left font-semibold">Disciplina</th>
+              <th class="py-4 px-4 text-center font-semibold">Aulas</th>
+              <th class="py-4 px-4 text-center font-semibold">Faltas</th>
+              <th class="py-4 px-4 text-center font-semibold">Situação</th>
+              <th class="py-4 px-4 text-center font-semibold">Frequência</th>
+              <th class="py-4 px-4 text-center font-semibold">Nota 1</th>
+              <th class="py-4 px-4 text-center font-semibold">Nota 2</th>
+              <th class="py-4 px-4 text-center font-semibold">Nota 3</th>
+              <th class="py-4 px-4 text-center font-semibold">Nota 4</th>
+              <th class="py-4 px-4 text-center font-semibold">Média</th>
+              <th class="py-4 px-4 text-center font-semibold">NF</th>
+              <th class="py-4 px-4 text-center font-semibold">MFD</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="divide-y divide-gray-200">
             <!-- Português -->
-            <tr class="hover:bg-gray-50">
-              <td class="py-3 px-4 border border-gray-300 font-medium">Português</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">80</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">2</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">
-                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Aprovado</span>
+            <tr class="hover:bg-blue-50 transition-colors">
+              <td class="py-4 px-4 font-medium flex items-center space-x-3">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-book text-blue-600"></i>
+                </div>
+                <span>Português</span>
               </td>
-              <td class="py-3 px-4 border border-gray-300 text-center font-semibold text-green-600">97.5%</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">9.5</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.8</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">9.2</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
-              <td class="py-3 px-4 border border-gray-300 text-center font-semibold">9.2</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">9.2</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+              <td class="py-4 px-4 text-center">80</td>
+              <td class="py-4 px-4 text-center">2</td>
+              <td class="py-4 px-4 text-center">
+                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Aprovado</span>
+              </td>
+              <td class="py-4 px-4 text-center font-semibold text-green-600">97.5%</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">9.5</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">8.8</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">9.2</td>
+              <td class="py-4 px-4 text-center text-gray-400">-</td>
+              <td class="py-4 px-4 text-center font-bold text-blue-600">9.2</td>
+              <td class="py-4 px-4 text-center font-semibold">9.2</td>
+              <td class="py-4 px-4 text-center text-gray-400">-</td>
             </tr>
+            
             <!-- Matemática -->
-            <tr class="hover:bg-gray-50">
-              <td class="py-3 px-4 border border-gray-300 font-medium">Matemática</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">80</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">1</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">
-                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Aprovado</span>
+            <tr class="hover:bg-blue-50 transition-colors">
+              <td class="py-4 px-4 font-medium flex items-center space-x-3">
+                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-calculator text-green-600"></i>
+                </div>
+                <span>Matemática</span>
               </td>
-              <td class="py-3 px-4 border border-gray-300 text-center font-semibold text-green-600">98.8%</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.5</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">9.0</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.7</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
-              <td class="py-3 px-4 border border-gray-300 text-center font-semibold">8.7</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.7</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+              <td class="py-4 px-4 text-center">80</td>
+              <td class="py-4 px-4 text-center">1</td>
+              <td class="py-4 px-4 text-center">
+                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Aprovado</span>
+              </td>
+              <td class="py-4 px-4 text-center font-semibold text-green-600">98.8%</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">8.5</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">9.0</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">8.7</td>
+              <td class="py-4 px-4 text-center text-gray-400">-</td>
+              <td class="py-4 px-4 text-center font-bold text-blue-600">8.7</td>
+              <td class="py-4 px-4 text-center font-semibold">8.7</td>
+              <td class="py-4 px-4 text-center text-gray-400">-</td>
             </tr>
+            
             <!-- História -->
-            <tr class="hover:bg-gray-50">
-              <td class="py-3 px-4 border border-gray-300 font-medium">História</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">60</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">0</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">
-                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Aprovado</span>
+            <tr class="hover:bg-blue-50 transition-colors">
+              <td class="py-4 px-4 font-medium flex items-center space-x-3">
+                <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-monument text-yellow-600"></i>
+                </div>
+                <span>História</span>
               </td>
-              <td class="py-3 px-4 border border-gray-300 text-center font-semibold text-green-600">100%</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">9.0</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.5</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">9.2</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
-              <td class="py-3 px-4 border border-gray-300 text-center font-semibold">8.9</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.9</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+              <td class="py-4 px-4 text-center">60</td>
+              <td class="py-4 px-4 text-center">0</td>
+              <td class="py-4 px-4 text-center">
+                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Aprovado</span>
+              </td>
+              <td class="py-4 px-4 text-center font-semibold text-green-600">100%</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">9.0</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">8.5</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">9.2</td>
+              <td class="py-4 px-4 text-center text-gray-400">-</td>
+              <td class="py-4 px-4 text-center font-bold text-blue-600">8.9</td>
+              <td class="py-4 px-4 text-center font-semibold">8.9</td>
+              <td class="py-4 px-4 text-center text-gray-400">-</td>
             </tr>
+            
             <!-- Geografia -->
-            <tr class="hover:bg-gray-50">
-              <td class="py-3 px-4 border border-gray-300 font-medium">Geografia</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">60</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">3</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">
-                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Aprovado</span>
+            <tr class="hover:bg-blue-50 transition-colors">
+              <td class="py-4 px-4 font-medium flex items-center space-x-3">
+                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-globe-americas text-purple-600"></i>
+                </div>
+                <span>Geografia</span>
               </td>
-              <td class="py-3 px-4 border border-gray-300 text-center font-semibold text-green-600">95%</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">7.5</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.0</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.5</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
-              <td class="py-3 px-4 border border-gray-300 text-center font-semibold">8.0</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.0</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+              <td class="py-4 px-4 text-center">60</td>
+              <td class="py-4 px-4 text-center">3</td>
+              <td class="py-4 px-4 text-center">
+                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Aprovado</span>
+              </td>
+              <td class="py-4 px-4 text-center font-semibold text-green-600">95%</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">7.5</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">8.0</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">8.5</td>
+              <td class="py-4 px-4 text-center text-gray-400">-</td>
+              <td class="py-4 px-4 text-center font-bold text-blue-600">8.0</td>
+              <td class="py-4 px-4 text-center font-semibold">8.0</td>
+              <td class="py-4 px-4 text-center text-gray-400">-</td>
             </tr>
+            
             <!-- Ciências -->
-            <tr class="hover:bg-gray-50">
-              <td class="py-3 px-4 border border-gray-300 font-medium">Ciências</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">80</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">2</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">
-                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Aprovado</span>
+            <tr class="hover:bg-blue-50 transition-colors">
+              <td class="py-4 px-4 font-medium flex items-center space-x-3">
+                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-flask text-red-600"></i>
+                </div>
+                <span>Ciências</span>
               </td>
-              <td class="py-3 px-4 border border-gray-300 text-center font-semibold text-green-600">97.5%</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.8</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">9.2</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.5</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
-              <td class="py-3 px-4 border border-gray-300 text-center font-semibold">8.8</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">8.8</td>
-              <td class="py-3 px-4 border border-gray-300 text-center">-</td>
+              <td class="py-4 px-4 text-center">80</td>
+              <td class="py-4 px-4 text-center">2</td>
+              <td class="py-4 px-4 text-center">
+                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Aprovado</span>
+              </td>
+              <td class="py-4 px-4 text-center font-semibold text-green-600">97.5%</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">8.8</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">9.2</td>
+              <td class="py-4 px-4 text-center grade-cell font-medium">8.5</td>
+              <td class="py-4 px-4 text-center text-gray-400">-</td>
+              <td class="py-4 px-4 text-center font-bold text-blue-600">8.8</td>
+              <td class="py-4 px-4 text-center font-semibold">8.8</td>
+              <td class="py-4 px-4 text-center text-gray-400">-</td>
             </tr>
           </tbody>
         </table>
@@ -234,52 +383,170 @@
     </div>
 
     <!-- Resumo Geral -->
-    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="bg-white rounded-lg shadow-md p-4">
-        <h3 class="font-semibold text-lg mb-2">Média Geral</h3>
-        <p class="text-2xl font-bold text-blue-600">8.72</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-semibold text-lg text-gray-800">Média Geral</h3>
+          <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+            <i class="fas fa-chart-line text-blue-600 text-xl"></i>
+          </div>
+        </div>
+        <p class="text-3xl font-bold text-blue-600 mb-2">8.72</p>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+          <div class="bg-blue-600 h-2 rounded-full progress-bar" style="width: 87.2%"></div>
+        </div>
+        <p class="text-sm text-gray-600 mt-2">Acima da média mínima (7.0)</p>
       </div>
-      <div class="bg-white rounded-lg shadow-md p-4">
-        <h3 class="font-semibold text-lg mb-2">Frequência Geral</h3>
-        <p class="text-2xl font-bold text-green-600">97.8%</p>
+      
+      <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-semibold text-lg text-gray-800">Frequência Geral</h3>
+          <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+            <i class="fas fa-user-check text-green-600 text-xl"></i>
+          </div>
+        </div>
+        <p class="text-3xl font-bold text-green-600 mb-2">97.8%</p>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+          <div class="bg-green-600 h-2 rounded-full progress-bar" style="width: 97.8%"></div>
+        </div>
+        <p class="text-sm text-gray-600 mt-2">Acima do mínimo exigido (75%)</p>
       </div>
-      <div class="bg-white rounded-lg shadow-md p-4">
-        <h3 class="font-semibold text-lg mb-2">Situação</h3>
-        <p class="text-xl font-bold text-green-600">Aprovado</p>
+      
+      <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-semibold text-lg text-gray-800">Situação Geral</h3>
+          <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+            <i class="fas fa-trophy text-green-600 text-xl"></i>
+          </div>
+        </div>
+        <p class="text-2xl font-bold text-green-600 mb-2">Aprovado</p>
+        <div class="flex items-center space-x-2 text-sm text-gray-600">
+          <i class="fas fa-check-circle text-green-500"></i>
+          <span>Todas as disciplinas com aprovação</span>
+        </div>
+        <div class="mt-4 bg-green-50 p-3 rounded-lg border border-green-200">
+          <p class="text-sm text-green-700 flex items-center space-x-2">
+            <i class="fas fa-info-circle"></i>
+            <span>Parabéns! Seu desempenho está excelente.</span>
+          </p>
+        </div>
       </div>
     </div>
 
-    <!-- Legenda -->
-    <div class="mt-6 bg-white rounded-lg shadow-md p-4">
-      <h3 class="font-semibold text-lg mb-2">Legenda</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-        <p><span class="font-semibold">NF:</span> Nota Final</p>
-        <p><span class="font-semibold">MFD:</span> Média Final para Aprovação</p>
-        <p><span class="font-semibold">Média Mínima:</span> 7.0</p>
-        <p><span class="font-semibold">Frequência Mínima:</span> 75%</p>
+    <!-- Legenda e Observações -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-semibold text-lg text-gray-800 mb-4 flex items-center space-x-2">
+            <i class="fas fa-info-circle text-blue-500"></i>
+            <span>Legenda</span>
+          </h3>
+          <div class="grid grid-cols-1 gap-3 text-sm">
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="font-medium">NF:</span>
+              <span class="text-gray-600">Nota Final</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="font-medium">MFD:</span>
+              <span class="text-gray-600">Média Final para Aprovação</span>
+            </div>
+            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+              <span class="font-medium">Média Mínima:</span>
+              <span class="text-gray-600">7.0</span>
+            </div>
+            <div class="flex justify-between items-center py-2">
+              <span class="font-medium">Frequência Mínima:</span>
+              <span class="text-gray-600">75%</span>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-semibold text-lg text-gray-800 mb-4 flex items-center space-x-2">
+            <i class="fas fa-star text-yellow-500"></i>
+            <span>Desempenho</span>
+          </h3>
+          <div class="space-y-3">
+            <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+              <i class="fas fa-medal text-blue-500 text-xl"></i>
+              <div>
+                <p class="font-medium text-blue-800">Melhor Desempenho</p>
+                <p class="text-sm text-blue-600">Português - 9.2</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-3 p-3 bg-green-50 rounded-lg">
+              <i class="fas fa-chart-line text-green-500 text-xl"></i>
+              <div>
+                <p class="font-medium text-green-800">Frequência Exemplar</p>
+                <p class="text-sm text-green-600">História - 100%</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
 
-  <!-- Script para abrir/fechar menu -->
+  <!-- Script para funcionalidades -->
   <script>
+    // Menu lateral
     const menuButton = document.getElementById('menuButton');
     const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
     
-    menuButton.addEventListener('click', () => {
+    function toggleMenu() {
+      const isOpen = !sidebar.classList.contains('-translate-x-full');
       sidebar.classList.toggle('-translate-x-full');
-    });
+      overlay.classList.toggle('hidden');
+      document.body.classList.toggle('sidebar-open', !isOpen);
+    }
     
-    // Fechar menu ao clicar fora dele
-    document.addEventListener('click', (event) => {
-      const isClickInsideSidebar = sidebar.contains(event.target);
-      const isClickInsideMenuButton = menuButton.contains(event.target);
-      
-      if (!isClickInsideSidebar && !isClickInsideMenuButton && !sidebar.classList.contains('-translate-x-full')) {
-        sidebar.classList.add('-translate-x-full');
+    menuButton.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+    
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+        toggleMenu();
       }
     });
-  </script>
 
+    // Efeitos de animação para as células de notas
+    document.querySelectorAll('.grade-cell').forEach(cell => {
+      cell.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.05)';
+      });
+      
+      cell.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+      });
+    });
+
+    // Simular carregamento das barras de progresso
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.progress-bar').forEach(bar => {
+        // Já está com width definido no style, apenas ativar a transição
+        bar.style.transition = 'width 1s ease-in-out';
+      });
+    });
+
+    // Filtros de período
+    document.querySelectorAll('button:not(.bg-blue-500)').forEach(button => {
+      button.addEventListener('click', function() {
+        // Remover classe ativa de todos os botões
+        document.querySelectorAll('button').forEach(btn => {
+          btn.classList.remove('bg-blue-500', 'text-white');
+          btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+        });
+        
+        // Adicionar classe ativa ao botão clicado
+        this.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+        this.classList.add('bg-blue-500', 'text-white');
+        
+        // Aqui você implementaria a lógica para filtrar por período
+        const periodo = this.textContent.trim();
+        console.log(`Filtrando por: ${periodo}`);
+      });
+    });
+  </script>
 </body>
 </html>

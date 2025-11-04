@@ -1,84 +1,243 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SigEduc</title>
+    <title>Login - SIGEduc</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a2e0ad6c58.js" crossorigin="anonymous"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+        }
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+    </style>
 </head>
 
-<body class="h-screen flex">
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <!-- Container Principal -->
+    <div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden card-hover">
+        <div class="flex flex-col md:flex-row">
+            
+            <!-- Lado Esquerdo - Formulário -->
+            <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                <!-- Logo -->
+                <div class="mb-8 text-center md:text-left">
+                    <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-48 mx-auto md:mx-0">
+                </div>
 
-    <!-- Lado esquerdo - Formulário -->
-    <div class="w-full md:w-1/2 flex flex-col justify-center items-center px-10 md:px-24 bg-white text-center">
+                <!-- Saudação -->
+                <div class="mb-8 text-center md:text-left">
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+                        Olá! <span class="inline-block animate-wiggle">👋</span>
+                    </h1>
+                    <p class="text-gray-600 text-lg">Use suas credenciais para acessar o sistema</p>
+                </div>
 
-        <!-- Logo centralizada -->
-        <div class="mb-10 flex justify-center">
-            <img src="img/Group 18.png" alt="Logo SigEduc" class="w-56">
+                <!-- Formulário -->
+                <form id="loginForm" class="space-y-6">
+                    <!-- Campo Usuário -->
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-user text-gray-400"></i>
+                        </div>
+                        <input 
+                            type="text" 
+                            placeholder="Usuário" 
+                            required
+                            class="w-full pl-10 pr-4 py-4 border border-gray-300 rounded-xl focus:outline-none input-focus transition-all duration-200"
+                        >
+                    </div>
+
+                    <!-- Campo Senha -->
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <input 
+                            id="senha" 
+                            type="password" 
+                            placeholder="Senha" 
+                            required
+                            class="w-full pl-10 pr-12 py-4 border border-gray-300 rounded-xl focus:outline-none input-focus transition-all duration-200"
+                        >
+                        <button 
+                            type="button" 
+                            id="toggleSenha" 
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <!-- Lembrar e Esqueci Senha -->
+                    <div class="flex justify-between items-center">
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500">
+                            <span class="text-gray-700 text-sm">Lembrar usuário</span>
+                        </label>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+                            Esqueci a senha
+                        </a>
+                    </div>
+
+                    <!-- Botão Entrar -->
+                    <button 
+                        type="submit"
+                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                    >
+                        <span>Entrar no Sistema</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <!-- Mensagem de Carregamento -->
+                    <div id="loadingMessage" class="hidden text-center py-4">
+                        <div class="inline-flex items-center space-x-2 text-blue-600">
+                            <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                            <span>Autenticando...</span>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Informações de Suporte -->
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <div class="text-center text-sm text-gray-500">
+                        <p class="flex items-center justify-center space-x-1">
+                            <i class="fas fa-headset"></i>
+                            <span>Suporte: (84) 4008-4088 - Opção 1</span>
+                        </p>
+                        <p class="mt-1">SIGEduc | GPD/SEEC</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lado Direito - Banner -->
+            <div class="w-full md:w-1/2 gradient-bg text-white p-8 md:p-12 flex flex-col justify-between relative overflow-hidden">
+                <!-- Overlay decorativo -->
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-10 right-10 w-32 h-32 bg-white rounded-full"></div>
+                    <div class="absolute bottom-20 left-20 w-24 h-24 bg-white rounded-full"></div>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white rounded-full"></div>
+                </div>
+
+                <!-- Conteúdo do Banner -->
+                <div class="relative z-10">
+                    <!-- Imagem Principal -->
+                    <div class="mb-8 flex justify-center">
+                        <div class="w-48 h-48 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/30">
+                            <i class="fas fa-graduation-cap text-white text-6xl"></i>
+                        </div>
+                    </div>
+
+                    <!-- Texto de Boas-vindas -->
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            Bem-vindo ao <span class="block">SIGEduc</span>
+                        </h2>
+                        <p class="text-blue-100 text-lg leading-relaxed max-w-md mx-auto">
+                            Sistema Integrado de Gestão da Educação do Rio Grande do Norte
+                        </p>
+                    </div>
+
+                    <!-- Recursos do Sistema -->
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle text-green-300"></i>
+                            <span class="text-sm">Boletim Online</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle text-green-300"></i>
+                            <span class="text-sm">Histórico Escolar</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle text-green-300"></i>
+                            <span class="text-sm">Mensagens</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle text-green-300"></i>
+                            <span class="text-sm">Disciplinas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rodapé do Banner -->
+                <div class="relative z-10 text-center">
+                    <div class="mb-6">
+                        <img src="img/Brasão_do_Rio_Grande_do_Norte.svg.png" 
+                             alt="Brasão RN" 
+                             class="w-16 mx-auto mb-3 opacity-90">
+                        <h3 class="text-4xl font-bold">
+                            RN <span class="font-light">SEEC</span>
+                        </h3>
+                        <p class="text-blue-100 text-sm mt-2">
+                            SECRETARIA DE ESTADO DA EDUCAÇÃO, DO ESPORTE E DO LAZER - SEEC
+                        </p>
+                    </div>
+                    
+                    <!-- Versão do Sistema -->
+                    <div class="bg-black/20 rounded-lg p-3 backdrop-blur-sm">
+                        <p class="text-xs text-blue-200">
+                            SIGEduc v20251020_1709
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Saudação -->
-        <h1 class="text-3xl font-semibold mb-2 flex items-center justify-center gap-2">
-            Olá! <span>👋</span>
-        </h1>
-        <p class="text-gray-600 mb-8">Use suas credenciais para acessar o SigEduc.</p>
-
-        <!-- Formulário -->
-        <form class="w-full max-w-md space-y-6">
-            <div>
-                <input type="text" placeholder="Usuário"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div class="relative">
-                <input id="senha" type="password" placeholder="Senha"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <!-- Ícone olho -->
-                <span id="toggleSenha" class="absolute right-4 top-3.5 cursor-pointer text-gray-500">
-                    👁️
-                </span>
-            </div>
-
-            <div class="text-right">
-                <a href="#" class="text-blue-600 text-sm hover:underline">Esqueci a senha</a>
-            </div>
-
-            <button type="submit"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2">
-                <a href="index.html"></a>Entrar
-            </button>
-        </form>
     </div>
 
-    <!-- Lado direito - Imagem com gradiente -->
-    <div class="hidden md:flex w-1/2 relative">
-        <img src="img/estudante.jfif" alt="Imagem SigEduc" class="absolute inset-0 w-full h-full object-cover">
-        <div class="absolute inset-0 bg-blue-700 bg-opacity-60"></div>
-
-        <!-- Conteúdo centralizado no rodapé -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white text-center">
-            <img src="img/Brasão_do_Rio_Grande_do_Norte.svg.png"
-                alt="Logo RN" class="w-24 mx-auto mb-3 opacity-90">
-
-            <h2 class="text-6xl font-bold leading-tight">RN <span class="font-light">SEEC</span></h2>
-            <p class="text-sm opacity-90">
-                SECRETARIA DE ESTADO DA EDUCAÇÃO, DO ESPORTE E DO LAZER - SEEC
-            </p>
-            <p class="text-xs opacity-80 mt-1">
-                SIGEduc | GPD/SEEC - (84) 4008-4088 / Opção 1<br>
-                -sigeduc.app3.srv3inst1 v20251020_1709
-            </p>
-        </div>
-    </div>
-    <!-- Script para mostrar/ocultar senha -->
+    <!-- Script para funcionalidades -->
     <script>
+        // Alternar visibilidade da senha
         const senha = document.getElementById("senha");
-        const toggle = document.getElementById("toggleSenha");
-        toggle.addEventListener("click", () => {
-            senha.type = senha.type === "password" ? "text" : "password";
+        const toggleSenha = document.getElementById("toggleSenha");
+        
+        toggleSenha.addEventListener("click", () => {
+            const type = senha.getAttribute("type") === "password" ? "text" : "password";
+            senha.setAttribute("type", type);
+            toggleSenha.innerHTML = type === "password" ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+
+        // Simular login
+        const loginForm = document.getElementById("loginForm");
+        const loadingMessage = document.getElementById("loadingMessage");
+
+        loginForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            // Mostrar loading
+            loadingMessage.classList.remove("hidden");
+            
+            // Simular processo de autenticação
+            setTimeout(() => {
+                // Redirecionar para a página principal
+                window.location.href = "index.html";
+            }, 1500);
+        });
+
+        // Efeitos de foco nos inputs
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('ring-2', 'ring-blue-500', 'ring-opacity-50');
+                this.parentElement.classList.remove('border-gray-300');
+                this.parentElement.classList.add('border-blue-500');
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('ring-2', 'ring-blue-500', 'ring-opacity-50');
+                this.parentElement.classList.remove('border-blue-500');
+                this.parentElement.classList.add('border-gray-300');
+            });
         });
     </script>
-
 </body>
-
 </html>

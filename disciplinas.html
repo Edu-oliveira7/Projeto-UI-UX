@@ -5,132 +5,541 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minhas Disciplinas - SIGEduc</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a2e0ad6c58.js" crossorigin="anonymous"></script>
+  <style>
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.15);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+    .subject-card {
+      transition: all 0.3s ease;
+    }
+    .subject-card:hover {
+      transform: translateY(-3px);
+    }
+    .progress-ring {
+      transition: stroke-dashoffset 1s ease-in-out;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gradient-to-br from-blue-50 to-gray-100 font-sans min-h-screen">
 
   <!-- Header -->
-  <header class="flex justify-between items-center px-6 py-3 bg-gray-200 shadow">
-    <div class="flex items-center space-x-4">
-      <!-- Botão hamburguer -->
-      <button id="menuButton" class="text-gray-700 focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+  <header class="bg-white shadow-sm border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center space-x-4">
+          <!-- Botão hamburguer -->
+          <button id="menuButton" class="text-gray-600 hover:text-blue-600 focus:outline-none transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
 
-      <!-- Logo -->
-      <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-36 object-contain">
-    </div>
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-40 object-contain">
+          </div>
+        </div>
 
-    <div class="flex items-center space-x-3">
-      <button class="bg-gray-400 text-white px-6 py-1.5 rounded-full hover:bg-gray-500 transition">Aluno</button>
-      <button class="bg-gray-400 text-white px-6 py-1.5 rounded-full hover:bg-gray-500 transition">Sair</button>
+        <div class="flex items-center space-x-4">
+          <!-- Notificações -->
+          <div class="relative">
+            <button class="text-gray-500 hover:text-blue-600 transition-colors p-2 rounded-full hover:bg-blue-50">
+              <i class="fas fa-bell text-xl"></i>
+              <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+            </button>
+          </div>
+          
+          <!-- Perfil do Aluno -->
+          <div class="flex items-center space-x-3">
+            <div class="text-right hidden sm:block">
+              <p class="text-sm text-gray-600">Olá, <span class="font-medium">Aluno</span></p>
+              <p class="text-xs text-gray-500">9º Ano - Matutino</p>
+            </div>
+            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
+              MJ
+            </div>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
+              Sair
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
   <!-- Menu lateral (oculto por padrão) -->
-  <aside id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-200 shadow-md transform -translate-x-full transition-transform duration-300">
-    <div class="p-6">
-      <h2 class="text-2xl font-bold mb-4">Menu</h2>
-      <ul class="space-y-3">
-        <li><a href="index.html" class="block text-gray-700 hover:text-blue-600">Início</a></li>
-        <li><a href="#" class="block text-gray-700 font-semibold">Ensino</a>
-          <ul class="ml-4 mt-2 space-y-2">
-            <li><a href="boletim.html" class="text-gray-600 hover:text-blue-600">Boletim</a></li>
-            <li><a href="historico.html" class="text-gray-600 hover:text-blue-600">Histórico</a></li>
-            <li><a href="disciplinas.html" class="text-blue-600 font-medium">Minhas Disciplinas</a></li>
-          </ul>
-        </li>
-        <li><a href="servicos.html" class="block text-gray-700 hover:text-blue-600">Serviços</a></li>
-        <li><a href="mensagens.html" class="block text-gray-700 hover:text-blue-600">Caixa de Mensagens</a></li>
-      </ul>
+  <aside id="sidebar" class="fixed top-0 left-0 w-80 h-full bg-white shadow-xl transform -translate-x-full transition-transform duration-300 z-20">
+    <div class="p-6 h-full flex flex-col">
+      <!-- Usuário -->
+      <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 mb-6 rounded-xl flex items-center space-x-3">
+        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+          <i class="fas fa-user text-xl"></i>
+        </div>
+        <div>
+          <h3 class="font-bold">Aluno</h3>
+          <p class="text-sm opacity-90">9º Ano - Escola Municipal</p>
+        </div>
+      </div>
+
+      <h2 class="text-xl font-bold mb-6 text-gray-800 border-b pb-2">Menu Principal</h2>
+      
+      <!-- Botão Buscar -->
+      <div class="mb-6 relative">
+        <input type="text" placeholder="Buscar..." class="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+        <i class="fas fa-search absolute right-4 top-3.5 text-gray-400"></i>
+      </div>
+      
+      <nav class="flex-1">
+        <ul class="space-y-2">
+          <li>
+            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-home w-5 text-center"></i>
+              <span>Início</span>
+            </a>
+          </li>
+          <li>
+            <details class="group" open>
+              <summary class="flex justify-between items-center cursor-pointer px-4 py-3 bg-blue-50 text-blue-600 rounded-lg font-medium">
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-graduation-cap w-5 text-center"></i>
+                  <span>Ensino</span>
+                </div>
+                <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="ml-8 mt-2 space-y-2">
+                <li><a href="boletim.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Boletim</a></li>
+                <li><a href="historico.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Histórico</a></li>
+                <li><a href="disciplinas.html" class="block px-4 py-2 bg-blue-100 text-blue-600 rounded font-medium">Minhas Disciplinas</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details class="group">
+              <summary class="flex justify-between items-center cursor-pointer px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-concierge-bell w-5 text-center"></i>
+                  <span>Serviços</span>
+                </div>
+                <svg class="w-4 h-4 transition-transform group-open:rotate-180 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="ml-8 mt-2 space-y-2">
+                <li><a href="#" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Solicitações</a></li>
+                <li><a href="#" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Atestados</a></li>
+                <li><a href="#" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Transferências</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <a href="mensagens.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-envelope w-5 text-center"></i>
+              <span>Caixa de Mensagens</span>
+              <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">3</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <!-- Botão Sair -->
+      <button class="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white px-6 py-3 rounded-lg text-center hover:from-gray-700 hover:to-gray-800 transition-all mt-6 font-medium flex items-center justify-center space-x-2">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Sair do Sistema</span>
+      </button>
     </div>
   </aside>
 
-  <!-- Conteúdo principal -->
-  <main class="p-8">
-    <h1 class="text-5xl font-bold text-center mb-6">Minhas Disciplinas - 9º Ano</h1>
+  <!-- Overlay para fechar menu -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden"></div>
 
-    <div class="overflow-x-auto p-6">
-      <table class="min-w-full border border-gray-300 bg-white shadow-md rounded-lg">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="py-3 px-4 text-left font-semibold border">Disciplina</th>
-            <th class="py-3 px-4 text-left font-semibold border">Professor</th>
-            <th class="py-3 px-4 text-left font-semibold border">Detalhes</th>
-            <th class="py-3 px-4 text-left font-semibold border">Opções</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Disciplinas do 9º Ano -->
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 border">Português</td>
-            <td class="py-3 px-4 border">Bruno</td>
-            <td class="py-3 px-4 border">Leitura e gramática</td>
-            <td class="py-3 px-4 border"><button class="bg-blue-500 text-white px-4 py-1 rounded">Ver mais</button></td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 border">Matemática</td>
-            <td class="py-3 px-4 border">Carla</td>
-            <td class="py-3 px-4 border">Álgebra e geometria</td>
-            <td class="py-3 px-4 border"><button class="bg-blue-500 text-white px-4 py-1 rounded">Ver mais</button></td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 border">História</td>
-            <td class="py-3 px-4 border">José</td>
-            <td class="py-3 px-4 border">Brasil República</td>
-            <td class="py-3 px-4 border"><button class="bg-blue-500 text-white px-4 py-1 rounded">Ver mais</button></td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 border">Geografia</td>
-            <td class="py-3 px-4 border">Amanda</td>
-            <td class="py-3 px-4 border">Globalização e economia</td>
-            <td class="py-3 px-4 border"><button class="bg-blue-500 text-white px-4 py-1 rounded">Ver mais</button></td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 border">Ciências</td>
-            <td class="py-3 px-4 border">Marcos</td>
-            <td class="py-3 px-4 border">Corpo humano e ecossistemas</td>
-            <td class="py-3 px-4 border"><button class="bg-blue-500 text-white px-4 py-1 rounded">Ver mais</button></td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 border">Inglês</td>
-            <td class="py-3 px-4 border">Sofia</td>
-            <td class="py-3 px-4 border">Conversação e escrita</td>
-            <td class="py-3 px-4 border"><button class="bg-blue-500 text-white px-4 py-1 rounded">Ver mais</button></td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 border">Educação Física</td>
-            <td class="py-3 px-4 border">Lucas</td>
-            <td class="py-3 px-4 border">Práticas esportivas</td>
-            <td class="py-3 px-4 border"><button class="bg-blue-500 text-white px-4 py-1 rounded">Ver mais</button></td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 border">Artes</td>
-            <td class="py-3 px-4 border">Paula</td>
-            <td class="py-3 px-4 border">Expressão visual e música</td>
-            <td class="py-3 px-4 border"><button class="bg-blue-500 text-white px-4 py-1 rounded">Ver mais</button></td>
-          </tr>
-          <tr class="hover:bg-gray-50">
-            <td class="py-3 px-4 border">Ensino Religioso</td>
-            <td class="py-3 px-4 border">Ana</td>
-            <td class="py-3 px-4 border">Valores e ética</td>
-            <td class="py-3 px-4 border"><button class="bg-blue-500 text-white px-4 py-1 rounded">Ver mais</button></td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- Conteúdo principal -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Cabeçalho -->
+    <div class="text-center mb-12 fade-in">
+      <h1 class="text-4xl font-bold text-gray-800 mb-4">Minhas Disciplinas</h1>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+        <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">9º Ano - 2024</span>
+        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">Escola Municipal Dinarte Marinho</span>
+        <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium">Turma A - Matutino</span>
+      </div>
+      <p class="text-gray-600 max-w-2xl mx-auto">Acompanhe todas as suas disciplinas, professores e materiais de estudo em um só lugar.</p>
+    </div>
+
+    <!-- Filtros e Busca -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover fade-in">
+      <div class="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
+        <div class="flex-1">
+          <h3 class="text-lg font-semibold text-gray-800 mb-2 flex items-center space-x-2">
+            <i class="fas fa-filter text-blue-500"></i>
+            <span>Filtrar Disciplinas</span>
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <button class="px-3 py-1 bg-blue-500 text-white rounded-full text-sm transition-colors">Todas</button>
+            <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm hover:bg-gray-300 transition-colors">Linguagens</button>
+            <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm hover:bg-gray-300 transition-colors">Exatas</button>
+            <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm hover:bg-gray-300 transition-colors">Humanas</button>
+            <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm hover:bg-gray-300 transition-colors">Biológicas</button>
+          </div>
+        </div>
+        <div class="relative w-full md:w-64">
+          <input type="text" placeholder="Buscar disciplina..." class="w-full px-4 py-2 pl-10 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+          <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid de Disciplinas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <!-- Português -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden subject-card fade-in">
+        <div class="h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+              <i class="fas fa-book text-blue-600 text-xl"></i>
+            </div>
+            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Linguagens</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Português</h3>
+          <p class="text-gray-600 mb-4 text-sm">Leitura, gramática e interpretação textual</p>
+          
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+              <i class="fas fa-user text-gray-600 text-sm"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Prof. Bruno</p>
+              <p class="text-xs text-gray-500">Língua Portuguesa</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-tasks"></i>
+              <span>3 atividades</span>
+            </div>
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-file-alt"></i>
+              <span>5 materiais</span>
+            </div>
+          </div>
+          
+          <button class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 rounded-xl transition-all duration-300 font-medium flex items-center justify-center space-x-2">
+            <i class="fas fa-eye"></i>
+            <span>Ver Detalhes</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Matemática -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden subject-card fade-in">
+        <div class="h-2 bg-gradient-to-r from-green-500 to-green-600"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+              <i class="fas fa-calculator text-green-600 text-xl"></i>
+            </div>
+            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Exatas</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Matemática</h3>
+          <p class="text-gray-600 mb-4 text-sm">Álgebra, geometria e raciocínio lógico</p>
+          
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+              <i class="fas fa-user text-gray-600 text-sm"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Prof. Carla</p>
+              <p class="text-xs text-gray-500">Matemática</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-tasks"></i>
+              <span>5 atividades</span>
+            </div>
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-file-alt"></i>
+              <span>8 materiais</span>
+            </div>
+          </div>
+          
+          <button class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-3 rounded-xl transition-all duration-300 font-medium flex items-center justify-center space-x-2">
+            <i class="fas fa-eye"></i>
+            <span>Ver Detalhes</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- História -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden subject-card fade-in">
+        <div class="h-2 bg-gradient-to-r from-yellow-500 to-yellow-600"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+              <i class="fas fa-monument text-yellow-600 text-xl"></i>
+            </div>
+            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">Humanas</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">História</h3>
+          <p class="text-gray-600 mb-4 text-sm">Brasil República e história mundial</p>
+          
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+              <i class="fas fa-user text-gray-600 text-sm"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Prof. José</p>
+              <p class="text-xs text-gray-500">História</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-tasks"></i>
+              <span>2 atividades</span>
+            </div>
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-file-alt"></i>
+              <span>4 materiais</span>
+            </div>
+          </div>
+          
+          <button class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white py-3 rounded-xl transition-all duration-300 font-medium flex items-center justify-center space-x-2">
+            <i class="fas fa-eye"></i>
+            <span>Ver Detalhes</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Geografia -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden subject-card fade-in">
+        <div class="h-2 bg-gradient-to-r from-purple-500 to-purple-600"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+              <i class="fas fa-globe-americas text-purple-600 text-xl"></i>
+            </div>
+            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs font-medium">Humanas</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Geografia</h3>
+          <p class="text-gray-600 mb-4 text-sm">Globalização, economia e espaço geográfico</p>
+          
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+              <i class="fas fa-user text-gray-600 text-sm"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Prof. Amanda</p>
+              <p class="text-xs text-gray-500">Geografia</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-tasks"></i>
+              <span>4 atividades</span>
+            </div>
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-file-alt"></i>
+              <span>6 materiais</span>
+            </div>
+          </div>
+          
+          <button class="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white py-3 rounded-xl transition-all duration-300 font-medium flex items-center justify-center space-x-2">
+            <i class="fas fa-eye"></i>
+            <span>Ver Detalhes</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Ciências -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden subject-card fade-in">
+        <div class="h-2 bg-gradient-to-r from-red-500 to-red-600"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+              <i class="fas fa-flask text-red-600 text-xl"></i>
+            </div>
+            <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium">Biológicas</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Ciências</h3>
+          <p class="text-gray-600 mb-4 text-sm">Corpo humano, ecossistemas e química</p>
+          
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+              <i class="fas fa-user text-gray-600 text-sm"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Prof. Marcos</p>
+              <p class="text-xs text-gray-500">Ciências</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-tasks"></i>
+              <span>3 atividades</span>
+            </div>
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-file-alt"></i>
+              <span>7 materiais</span>
+            </div>
+          </div>
+          
+          <button class="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white py-3 rounded-xl transition-all duration-300 font-medium flex items-center justify-center space-x-2">
+            <i class="fas fa-eye"></i>
+            <span>Ver Detalhes</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Inglês -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden subject-card fade-in">
+        <div class="h-2 bg-gradient-to-r from-indigo-500 to-indigo-600"></div>
+        <div class="p-6">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+              <i class="fas fa-language text-indigo-600 text-xl"></i>
+            </div>
+            <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-medium">Linguagens</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 mb-2">Inglês</h3>
+          <p class="text-gray-600 mb-4 text-sm">Conversação, escrita e compreensão auditiva</p>
+          
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+              <i class="fas fa-user text-gray-600 text-sm"></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-800">Prof. Sofia</p>
+              <p class="text-xs text-gray-500">Língua Inglesa</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-tasks"></i>
+              <span>2 atividades</span>
+            </div>
+            <div class="flex items-center space-x-1">
+              <i class="fas fa-file-alt"></i>
+              <span>4 materiais</span>
+            </div>
+          </div>
+          
+          <button class="w-full bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white py-3 rounded-xl transition-all duration-300 font-medium flex items-center justify-center space-x-2">
+            <i class="fas fa-eye"></i>
+            <span>Ver Detalhes</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+      <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center space-x-2">
+        <i class="fas fa-chart-pie text-blue-500"></i>
+        <span>Resumo das Disciplinas</span>
+      </h3>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-600 mb-2">9</div>
+          <p class="text-sm text-gray-600">Disciplinas</p>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-600 mb-2">24</div>
+          <p class="text-sm text-gray-600">Atividades</p>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-600 mb-2">44</div>
+          <p class="text-sm text-gray-600">Materiais</p>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">8</div>
+          <p class="text-sm text-gray-600">Professores</p>
+        </div>
+      </div>
     </div>
   </main>
 
-  <!-- Script para abrir/fechar menu -->
+  <!-- Script para funcionalidades -->
   <script>
+    // Menu lateral
     const menuButton = document.getElementById('menuButton');
     const sidebar = document.getElementById('sidebar');
-    menuButton.addEventListener('click', () => {
+    const overlay = document.getElementById('overlay');
+    
+    function toggleMenu() {
+      const isOpen = !sidebar.classList.contains('-translate-x-full');
       sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+      document.body.classList.toggle('sidebar-open', !isOpen);
+    }
+    
+    menuButton.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+    
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+        toggleMenu();
+      }
+    });
+
+    // Filtros de disciplinas
+    document.querySelectorAll('.bg-gray-200').forEach(button => {
+      button.addEventListener('click', function() {
+        // Remover classe ativa de todos os botões
+        document.querySelectorAll('.bg-gray-200, .bg-blue-500').forEach(btn => {
+          btn.classList.remove('bg-blue-500', 'text-white');
+          btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+        });
+        
+        // Adicionar classe ativa ao botão clicado
+        this.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+        this.classList.add('bg-blue-500', 'text-white');
+        
+        // Aqui você implementaria a lógica para filtrar as disciplinas
+        const categoria = this.textContent.trim();
+        console.log(`Filtrando por: ${categoria}`);
+      });
+    });
+
+    // Busca de disciplinas
+    const searchInput = document.querySelector('input[type="text"]');
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      console.log(`Buscando: ${searchTerm}`);
+      // Aqui você implementaria a lógica de busca/filtro
+    });
+
+    // Efeitos de hover nas disciplinas
+    document.querySelectorAll('.subject-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
     });
   </script>
-
 </body>
 </html>
