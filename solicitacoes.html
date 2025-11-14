@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitações - SIGEduc</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a2e0ad6c58.js" crossorigin="anonymous"></script>
+  <style>
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    .sidebar-open {
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-gray-100 font-sans min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center space-x-4">
+          <!-- Botão hamburguer -->
+          <button id="menuButton" class="text-gray-600 hover:text-blue-600 focus:outline-none transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-40 object-contain">
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <!-- Notificações -->
+          <div class="relative">
+            <button class="text-gray-500 hover:text-blue-600 transition-colors p-2 rounded-full hover:bg-blue-50">
+              <i class="fas fa-bell text-xl"></i>
+              <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+            </button>
+          </div>
+          
+          <!-- Perfil do Aluno -->
+          <div class="flex items-center space-x-3">
+            <div class="text-right hidden sm:block">
+              <p class="text-sm text-gray-600">Olá, <span class="font-medium">Milleny Jamily</span></p>
+              <p class="text-xs text-gray-500">9º Ano - Matutino</p>
+            </div>
+            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
+              MJ
+            </div>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
+              Sair
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menu lateral (oculto por padrão) -->
+  <aside id="sidebar" class="fixed top-0 left-0 w-80 h-full bg-white shadow-xl transform -translate-x-full transition-transform duration-300 z-20">
+    <div class="p-6 h-full flex flex-col">
+      <!-- Usuário -->
+      <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 mb-6 rounded-xl flex items-center space-x-3">
+        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+          <i class="fas fa-user text-xl"></i>
+        </div>
+        <div>
+          <h3 class="font-bold">Milleny Jamily</h3>
+          <p class="text-sm opacity-90">9º Ano - Escola Municipal Dinarte Marinho</p>
+        </div>
+      </div>
+
+      <h2 class="text-xl font-bold mb-6 text-gray-800 border-b pb-2">Menu Principal</h2>
+      
+      <!-- Botão Buscar -->
+      <div class="mb-6 relative">
+        <input type="text" placeholder="Buscar..." class="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+        <i class="fas fa-search absolute right-4 top-3.5 text-gray-400"></i>
+      </div>
+      
+      <nav class="flex-1">
+        <ul class="space-y-2">
+          <li>
+            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-home w-5 text-center"></i>
+              <span>Início</span>
+            </a>
+          </li>
+          <li>
+            <details class="group">
+              <summary class="flex justify-between items-center cursor-pointer px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-graduation-cap w-5 text-center"></i>
+                  <span>Ensino</span>
+                </div>
+                <svg class="w-4 h-4 transition-transform group-open:rotate-180 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="ml-8 mt-2 space-y-2">
+                <li><a href="boletim.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Boletim</a></li>
+                <li><a href="historico.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Histórico</a></li>
+                <li><a href="disciplinas.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Minhas Disciplinas</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details class="group" open>
+              <summary class="flex justify-between items-center cursor-pointer px-4 py-3 bg-blue-50 text-blue-600 rounded-lg font-medium">
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-concierge-bell w-5 text-center"></i>
+                  <span>Serviços</span>
+                </div>
+                <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="ml-8 mt-2 space-y-2">
+                <li><a href="solicitacoes.html" class="block px-4 py-2 bg-blue-100 text-blue-600 rounded font-medium">Solicitações</a></li>
+                <li><a href="atestados.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Atestados</a></li>
+                <li><a href="transferencias.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Transferências</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <a href="mensagens.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-envelope w-5 text-center"></i>
+              <span>Caixa de Mensagens</span>
+              <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">2</span>
+            </a>
+          </li>
+          <li>
+            <a href="perfil.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-user-circle w-5 text-center"></i>
+              <span>Meu Perfil</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <!-- Botão Sair -->
+      <button class="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white px-6 py-3 rounded-lg text-center hover:from-gray-700 hover:to-gray-800 transition-all mt-6 font-medium flex items-center justify-center space-x-2">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Sair do Sistema</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Overlay para fechar menu -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden"></div>
+
+  <!-- Conteúdo principal -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Cabeçalho -->
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 fade-in">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Solicitações</h1>
+        <p class="text-gray-600">Solicite serviços e acompanhe seus pedidos</p>
+      </div>
+      <button id="novaSolicitacaoBtn" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 font-medium flex items-center space-x-2 mt-4 lg:mt-0">
+        <i class="fas fa-plus"></i>
+        <span>Nova Solicitação</span>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <!-- Sidebar de Tipos de Solicitação -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+          <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center space-x-2">
+            <i class="fas fa-list-alt text-blue-500"></i>
+            <span>Tipos de Solicitação</span>
+          </h3>
+          
+          <div class="space-y-3">
+            <button class="w-full flex items-center space-x-3 px-4 py-3 bg-blue-50 text-blue-600 rounded-lg font-medium transition-colors">
+              <i class="fas fa-file-alt w-5 text-center"></i>
+              <span>2ª Via de Documentos</span>
+            </button>
+            
+            <button class="w-full flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-exchange-alt w-5 text-center"></i>
+              <span>Transferência</span>
+            </button>
+            
+            <button class="w-full flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-utensils w-5 text-center"></i>
+              <span>Merenda Escolar</span>
+            </button>
+            
+            <button class="w-full flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-bus w-5 text-center"></i>
+              <span>Transporte</span>
+            </button>
+            
+            <button class="w-full flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-book w-5 text-center"></i>
+              <span>Material Didático</span>
+            </button>
+            
+            <button class="w-full flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-graduation-cap w-5 text-center"></i>
+              <span>Outros</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Estatísticas -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mt-6 card-hover fade-in">
+          <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center space-x-2">
+            <i class="fas fa-chart-pie text-blue-500"></i>
+            <span>Minhas Solicitações</span>
+          </h3>
+          
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-sm text-gray-600">Total</span>
+                <span class="text-sm font-semibold text-blue-600">4</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-500 h-2 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-sm text-gray-600">Concluídas</span>
+                <span class="text-sm font-semibold text-green-600">2</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-green-500 h-2 rounded-full" style="width: 50%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-sm text-gray-600">Em Andamento</span>
+                <span class="text-sm font-semibold text-white">1</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-yellow-500 h-2 rounded-full" style="width: 25%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-sm text-gray-600">Pendentes</span>
+                <span class="text-sm font-semibold text-red-600">1</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-red-500 h-2 rounded-full" style="width: 25%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Área Principal -->
+      <div class="lg:col-span-3">
+        <!-- Barra de Ferramentas -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 mb-6 card-hover fade-in">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div class="flex items-center space-x-3">
+              <div class="relative">
+                <input type="text" placeholder="Buscar solicitações..." class="pl-10 pr-4 py-2 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all w-64">
+                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+              </div>
+              
+              <select class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option>Todas</option>
+                <option>2ª Via</option>
+                <option>Transferência</option>
+                <option>Merenda</option>
+                <option>Transporte</option>
+                <option>Outros</option>
+              </select>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+              <button class="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <i class="fas fa-sync-alt"></i>
+              </button>
+              <button class="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <i class="fas fa-download"></i>
+              </button>
+              <button class="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lista de Solicitações -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden fade-in">
+          <!-- Cabeçalho da Lista -->
+          <div class="border-b border-gray-200 p-4 bg-gray-50">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold text-gray-800">Minhas Solicitações</h3>
+              <span class="text-sm text-gray-600">4 solicitações encontradas</span>
+            </div>
+          </div>
+          
+          <!-- Solicitações -->
+          <div class="divide-y divide-gray-100">
+            <!-- Solicitação 1 - Concluída -->
+            <div class="p-6 hover:bg-gray-50 transition-colors">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Concluída</span>
+                    <span class="text-sm text-gray-500">Solicitado em: 05/08/2024</span>
+                  </div>
+                  <h4 class="font-semibold text-gray-800 text-lg mb-1">2ª Via de Histórico Escolar</h4>
+                  <p class="text-gray-600 mb-2">Solicitação de segunda via do histórico escolar completo</p>
+                  <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                    <span class="flex items-center space-x-1">
+                      <i class="fas fa-hashtag"></i>
+                      <span>Protocolo: #20240805-001</span>
+                    </span>
+                    <span class="flex items-center space-x-1">
+                      <i class="fas fa-check-circle text-green-500"></i>
+                      <span>Concluído em: 10/08/2024</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors">
+                    <i class="fas fa-download"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Solicitação 2 - Em Andamento -->
+            <div class="p-6 hover:bg-gray-50 transition-colors">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <span class="bg-yellow-100 text-white px-3 py-1 rounded-full text-sm font-medium">Em Andamento</span>
+                    <span class="text-sm text-gray-500">Solicitado em: 12/08/2024</span>
+                  </div>
+                  <h4 class="font-semibold text-gray-800 text-lg mb-1">Isenção de Taxa de Merenda</h4>
+                  <p class="text-gray-600 mb-2">Solicitação de isenção da taxa de merenda escolar</p>
+                  <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                    <span class="flex items-center space-x-1">
+                      <i class="fas fa-hashtag"></i>
+                      <span>Protocolo: #20240812-002</span>
+                    </span>
+                    <span class="flex items-center space-x-1">
+                      <i class="fas fa-clock text-white"></i>
+                      <span>Em análise pela secretaria</span>
+                    </span>
+                  </div>
+                  <div class="mt-3">
+                    <div class="flex items-center space-x-2 text-sm text-gray-600">
+                      <span>Progresso:</span>
+                      <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 60%"></div>
+                      </div>
+                      <span>60%</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="p-2 text-gray-400 cursor-not-allowed rounded-lg">
+                    <i class="fas fa-download"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Solicitação 3 - Concluída -->
+            <div class="p-6 hover:bg-gray-50 transition-colors">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Concluída</span>
+                    <span class="text-sm text-gray-500">Solicitado em: 20/07/2024</span>
+                  </div>
+                  <h4 class="font-semibold text-gray-800 text-lg mb-1">2ª Via de Boletim</h4>
+                  <p class="text-gray-600 mb-2">Solicitação de segunda via do boletim do 2º trimestre</p>
+                  <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                    <span class="flex items-center space-x-1">
+                      <i class="fas fa-hashtag"></i>
+                      <span>Protocolo: #20240720-003</span>
+                    </span>
+                    <span class="flex items-center space-x-1">
+                      <i class="fas fa-check-circle text-green-500"></i>
+                      <span>Concluído em: 25/07/2024</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors">
+                    <i class="fas fa-download"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Solicitação 4 - Pendente -->
+            <div class="p-6 hover:bg-gray-50 transition-colors">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <div class="flex-1">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Pendente</span>
+                    <span class="text-sm text-gray-500">Solicitado em: 14/08/2024</span>
+                  </div>
+                  <h4 class="font-semibold text-gray-800 text-lg mb-1">Solicitação de Transporte Escolar</h4>
+                  <p class="text-gray-600 mb-2">Solicitação de vaga no transporte escolar municipal</p>
+                  <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                    <span class="flex items-center space-x-1">
+                      <i class="fas fa-hashtag"></i>
+                      <span>Protocolo: #20240814-004</span>
+                    </span>
+                    <span class="flex items-center space-x-1">
+                      <i class="fas fa-exclamation-triangle text-red-500"></i>
+                      <span>Documentação pendente</span>
+                    </span>
+                  </div>
+                  <div class="mt-2 text-sm text-red-600 flex items-center space-x-1">
+                    <i class="fas fa-info-circle"></i>
+                    <span>É necessário anexar comprovante de residência</span>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <button class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                    <i class="fas fa-paperclip"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Rodapé da Lista -->
+          <div class="border-t border-gray-200 p-4 bg-gray-50">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-600">Mostrando 4 solicitações</span>
+              <div class="flex items-center space-x-2">
+                <button class="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <span class="text-sm text-gray-600">Página 1 de 1</span>
+                <button class="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Informações Importantes -->
+        <div class="bg-red-500 border border-blue-200 rounded-2xl p-6 mt-6 fade-in">
+          <h3 class="text-lg font-semibold text-white mb-3 flex items-center space-x-2">
+            <i class="fas fa-exclamation-triangle text-white"></i>
+            <span>Informações Importantes</span>
+          </h3>
+          <ul class="space-y-2 text-sm text-white">
+            <li class="flex items-start space-x-2">
+              <i class="fas fa-clock text-white mt-0.5"></i>
+              <span>O prazo de análise varia de 3 a 10 dias úteis dependendo do tipo de solicitação</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <i class="fas fa-file-alt text-white mt-0.5"></i>
+              <span>Mantenha seus documentos pessoais atualizados no sistema</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <i class="fas fa-envelope text-white mt-0.5"></i>
+              <span>Você receberá notificações por e-mail sobre o andamento das solicitações</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <i class="fas fa-phone text-white mt-0.5"></i>
+              <span>Em caso de dúvidas, entre em contato com a secretaria da escola</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de Nova Solicitação -->
+  <div id="modalSolicitacao" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-gray-200">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-bold text-gray-800">Nova Solicitação</h3>
+          <button id="fecharModalSolicitacao" class="text-gray-400 hover:text-gray-600">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="p-6">
+        <form class="space-y-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Solicitação</label>
+            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              <option>Selecione o tipo de solicitação</option>
+              <option>2ª Via de Documentos</option>
+              <option>Transferência</option>
+              <option>Merenda Escolar</option>
+              <option>Transporte</option>
+              <option>Material Didático</option>
+              <option>Outros</option>
+            </select>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Documento Solicitado</label>
+            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              <option>Selecione o documento</option>
+              <option>Histórico Escolar</option>
+              <option>Boletim</option>
+              <option>Declaração de Matrícula</option>
+              <option>Declaração de Frequência</option>
+              <option>Certificado</option>
+              <option>Outros</option>
+            </select>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Período/Ano Letivo</label>
+            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              <option>2024</option>
+              <option>2023</option>
+              <option>2022</option>
+              <option>2021</option>
+              <option>Todo o período</option>
+            </select>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Finalidade</label>
+            <textarea rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Descreva a finalidade desta solicitação"></textarea>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Anexos (Opcional)</label>
+            <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+              <i class="fas fa-cloud-upload-alt text-gray-400 text-3xl mb-2"></i>
+              <p class="text-gray-600 mb-2">Clique para selecionar ou arraste os arquivos</p>
+              <p class="text-sm text-gray-500">Formatos aceitos: PDF, JPG, PNG (Máx. 10MB cada)</p>
+              <input type="file" class="hidden" id="fileUploadSolicitacao" multiple>
+              <button type="button" onclick="document.getElementById('fileUploadSolicitacao').click()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                Selecionar Arquivos
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-blue-50 p-4 rounded-lg">
+            <div class="flex items-start space-x-2">
+              <i class="fas fa-info-circle text-blue-500 mt-0.5"></i>
+              <div>
+                <p class="text-sm text-blue-700 font-medium">Informação Importante</p>
+                <p class="text-sm text-blue-600">Solicitações de 2ª via podem estar sujeitas a taxas administrativas. Consulte a secretaria para mais informações.</p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div class="p-6 border-t border-gray-200 bg-gray-50 rounded-b-2xl">
+        <div class="flex justify-end space-x-3">
+          <button id="cancelarSolicitacao" class="px-6 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors">
+            Cancelar
+          </button>
+          <button class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium">
+            Enviar Solicitação
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script para funcionalidades -->
+  <script>
+    // Menu lateral
+    const menuButton = document.getElementById('menuButton');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    
+    function toggleMenu() {
+      const isOpen = !sidebar.classList.contains('-translate-x-full');
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+      document.body.classList.toggle('sidebar-open', !isOpen);
+    }
+    
+    menuButton.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+    
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+        toggleMenu();
+      }
+    });
+
+    // Modal de Nova Solicitação
+    const modalSolicitacao = document.getElementById('modalSolicitacao');
+    const novaSolicitacaoBtn = document.getElementById('novaSolicitacaoBtn');
+    const fecharModalSolicitacao = document.getElementById('fecharModalSolicitacao');
+    const cancelarSolicitacao = document.getElementById('cancelarSolicitacao');
+
+    function abrirModalSolicitacao() {
+      modalSolicitacao.classList.remove('hidden');
+      document.body.classList.add('sidebar-open');
+    }
+
+    function fecharModalSolicitacaoFunc() {
+      modalSolicitacao.classList.add('hidden');
+      document.body.classList.remove('sidebar-open');
+    }
+
+    novaSolicitacaoBtn.addEventListener('click', abrirModalSolicitacao);
+    fecharModalSolicitacao.addEventListener('click', fecharModalSolicitacaoFunc);
+    cancelarSolicitacao.addEventListener('click', fecharModalSolicitacaoFunc);
+
+    // Fechar modal ao clicar fora
+    modalSolicitacao.addEventListener('click', (event) => {
+      if (event.target === modalSolicitacao) {
+        fecharModalSolicitacaoFunc();
+      }
+    });
+
+    // Fechar modal com ESC
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !modalSolicitacao.classList.contains('hidden')) {
+        fecharModalSolicitacaoFunc();
+      }
+    });
+
+    // Simular carregamento das barras de progresso
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.bg-blue-500, .bg-green-500, .bg-yellow-500, .bg-red-500').forEach(bar => {
+        bar.style.transition = 'width 1s ease-in-out';
+      });
+    });
+
+    // Navegação entre tipos de solicitação
+    document.querySelectorAll('.bg-gray-200, .bg-blue-50').forEach(button => {
+      button.addEventListener('click', function() {
+        // Remover classe ativa de todos os botões
+        document.querySelectorAll('.bg-gray-200, .bg-blue-50').forEach(btn => {
+          btn.classList.remove('bg-blue-50', 'text-blue-600', 'font-medium');
+          btn.classList.add('text-gray-700', 'hover:bg-gray-100');
+        });
+        
+        // Adicionar classe ativa ao botão clicado
+        this.classList.remove('text-gray-700', 'hover:bg-gray-100');
+        this.classList.add('bg-blue-50', 'text-blue-600', 'font-medium');
+        
+        const tipo = this.querySelector('span').textContent;
+        console.log(`Filtrando por: ${tipo}`);
+        // Aqui você implementaria a lógica de filtro
+      });
+    });
+  </script>
+</body>
+</html>

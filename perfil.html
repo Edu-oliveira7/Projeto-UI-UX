@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil - SIGEduc</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/a2e0ad6c58.js" crossorigin="anonymous"></script>
+  <style>
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    .progress-ring {
+      transition: stroke-dashoffset 1s ease-in-out;
+    }
+    .sidebar-open {
+      overflow: hidden;
+    }
+    .avatar-upload {
+      transition: all 0.3s ease;
+    }
+    .avatar-upload:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-gray-100 font-sans min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-white shadow-sm border-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center space-x-4">
+          <!-- Botão hamburguer -->
+          <button id="menuButton" class="text-gray-600 hover:text-blue-600 focus:outline-none transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          <!-- Logo -->
+          <div class="flex items-center">
+            <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-40 object-contain">
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <!-- Notificações -->
+          <div class="relative">
+            <button class="text-gray-500 hover:text-blue-600 transition-colors p-2 rounded-full hover:bg-blue-50">
+              <i class="fas fa-bell text-xl"></i>
+              <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+            </button>
+          </div>
+          
+          <!-- Perfil do Aluno -->
+          <div class="flex items-center space-x-3">
+            <div class="text-right hidden sm:block">
+              <p class="text-sm text-gray-600">Olá, <span class="font-medium">Milleny Jamily</span></p>
+              <p class="text-xs text-gray-500">9º Ano - Matutino</p>
+            </div>
+            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
+              MJ
+            </div>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
+              Sair
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Menu lateral (oculto por padrão) -->
+  <aside id="sidebar" class="fixed top-0 left-0 w-80 h-full bg-white shadow-xl transform -translate-x-full transition-transform duration-300 z-20">
+    <div class="p-6 h-full flex flex-col">
+      <!-- Usuário -->
+      <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 mb-6 rounded-xl flex items-center space-x-3">
+        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+          <i class="fas fa-user text-xl"></i>
+        </div>
+        <div>
+          <h3 class="font-bold">Milleny Jamily</h3>
+          <p class="text-sm opacity-90">9º Ano - Escola Municipal Dinarte Marinho</p>
+        </div>
+      </div>
+
+      <h2 class="text-xl font-bold mb-6 text-gray-800 border-b pb-2">Menu Principal</h2>
+      
+      <!-- Botão Buscar -->
+      <div class="mb-6 relative">
+        <input type="text" placeholder="Buscar..." class="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+        <i class="fas fa-search absolute right-4 top-3.5 text-gray-400"></i>
+      </div>
+      
+      <nav class="flex-1">
+        <ul class="space-y-2">
+          <li>
+            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-home w-5 text-center"></i>
+              <span>Início</span>
+            </a>
+          </li>
+          <li>
+            <details class="group">
+              <summary class="flex justify-between items-center cursor-pointer px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-graduation-cap w-5 text-center"></i>
+                  <span>Ensino</span>
+                </div>
+                <svg class="w-4 h-4 transition-transform group-open:rotate-180 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="ml-8 mt-2 space-y-2">
+                <li><a href="boletim.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Boletim</a></li>
+                <li><a href="historico.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Histórico</a></li>
+                <li><a href="disciplinas.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Minhas Disciplinas</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details class="group">
+              <summary class="flex justify-between items-center cursor-pointer px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                <div class="flex items-center space-x-3">
+                  <i class="fas fa-concierge-bell w-5 text-center"></i>
+                  <span>Serviços</span>
+                </div>
+                <svg class="w-4 h-4 transition-transform group-open:rotate-180 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <ul class="ml-8 mt-2 space-y-2">
+                <li><a href="#" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Solicitações</a></li>
+                <li><a href="#" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Atestados</a></li>
+                <li><a href="#" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Transferências</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <a href="mensagens.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <i class="fas fa-envelope w-5 text-center"></i>
+              <span>Caixa de Mensagens</span>
+              <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">3</span>
+            </a>
+          </li>
+          <li>
+            <a href="perfil.html" class="flex items-center space-x-3 px-4 py-3 bg-blue-50 text-blue-600 rounded-lg font-medium">
+              <i class="fas fa-user-circle w-5 text-center"></i>
+              <span>Meu Perfil</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <!-- Botão Sair -->
+      <button class="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white px-6 py-3 rounded-lg text-center hover:from-gray-700 hover:to-gray-800 transition-all mt-6 font-medium flex items-center justify-center space-x-2">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Sair do Sistema</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Overlay para fechar menu -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden"></div>
+
+  <!-- Conteúdo principal -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Cabeçalho do Perfil -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 card-hover fade-in">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+        <!-- Avatar e Informações Básicas -->
+        <div class="flex flex-col items-center lg:items-start space-y-4">
+          <div class="relative">
+            <div class="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+              MJ
+            </div>
+            <button class="absolute bottom-2 right-2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-blue-600 hover:bg-blue-50 transition-colors avatar-upload">
+              <i class="fas fa-camera"></i>
+            </button>
+          </div>
+          <div class="text-center lg:text-left">
+            <h1 class="text-2xl font-bold text-gray-800">Milleny Jamily da Silva</h1>
+            <p class="text-gray-600">Aluna - 9º Ano A</p>
+            <div class="flex items-center space-x-2 mt-2 justify-center lg:justify-start">
+              <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                <i class="fas fa-circle text-green-500 text-xs mr-1"></i>
+                Status: Ativo
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estatísticas Rápidas -->
+        <div class="flex-1 grid grid-cols-2 md:grid-cols-4 gap-4 lg:ml-8">
+          <div class="text-center p-4 bg-blue-50 rounded-xl">
+            <div class="text-2xl font-bold text-blue-600 mb-1">8.7</div>
+            <p class="text-sm text-gray-600">Média Geral</p>
+          </div>
+          <div class="text-center p-4 bg-green-50 rounded-xl">
+            <div class="text-2xl font-bold text-green-600 mb-1">96%</div>
+            <p class="text-sm text-gray-600">Frequência</p>
+          </div>
+          <div class="text-center p-4 bg-purple-50 rounded-xl">
+            <div class="text-2xl font-bold text-purple-600 mb-1">9</div>
+            <p class="text-sm text-gray-600">Disciplinas</p>
+          </div>
+          <div class="text-center p-4 bg-yellow-50 rounded-xl">
+            <div class="text-2xl font-bold text-yellow-600 mb-1">A</div>
+            <p class="text-sm text-gray-600">Turma</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Coluna Esquerda - Informações Pessoais -->
+      <div class="lg:col-span-2 space-y-6">
+        <!-- Informações Pessoais -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-gray-800 flex items-center space-x-2">
+              <i class="fas fa-user text-blue-500"></i>
+              <span>Informações Pessoais</span>
+            </h2>
+            <button class="text-blue-600 hover:text-blue-800 font-medium flex items-center space-x-1">
+              <i class="fas fa-edit text-sm"></i>
+              <span>Editar</span>
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Nome Completo</label>
+                <p class="text-gray-800 font-medium">Milleny Jamily da Silva</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Data de Nascimento</label>
+                <p class="text-gray-800 font-medium">15/03/2009</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">CPF</label>
+                <p class="text-gray-800 font-medium">123.456.789-00</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">RG</label>
+                <p class="text-gray-800 font-medium">12.345.678-9</p>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Nome da Mãe</label>
+                <p class="text-gray-800 font-medium">Maria Silva Santos</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Nome do Pai</label>
+                <p class="text-gray-800 font-medium">João da Silva Oliveira</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">E-mail</label>
+                <p class="text-gray-800 font-medium">milleny.jamily@escola.edu.br</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Telefone</label>
+                <p class="text-gray-800 font-medium">(84) 99999-9999</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Endereço -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-gray-800 flex items-center space-x-2">
+              <i class="fas fa-home text-blue-500"></i>
+              <span>Endereço</span>
+            </h2>
+            <button class="text-blue-600 hover:text-blue-800 font-medium flex items-center space-x-1">
+              <i class="fas fa-edit text-sm"></i>
+              <span>Editar</span>
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Logradouro</label>
+                <p class="text-gray-800 font-medium">Rua Professora Maria da Glória, 123</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Bairro</label>
+                <p class="text-gray-800 font-medium">Centro</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Cidade</label>
+                <p class="text-gray-800 font-medium">Natal</p>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Complemento</label>
+                <p class="text-gray-800 font-medium">Apto 101</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">CEP</label>
+                <p class="text-gray-800 font-medium">59000-000</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Estado</label>
+                <p class="text-gray-800 font-medium">Rio Grande do Norte</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Informações Acadêmicas -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-gray-800 flex items-center space-x-2">
+              <i class="fas fa-graduation-cap text-blue-500"></i>
+              <span>Informações Acadêmicas</span>
+            </h2>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Matrícula</label>
+                <p class="text-gray-800 font-medium">20240012345</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Série/Ano</label>
+                <p class="text-gray-800 font-medium">9º Ano do Ensino Fundamental</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Turma</label>
+                <p class="text-gray-800 font-medium">9º Ano A - Matutino</p>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Escola</label>
+                <p class="text-gray-800 font-medium">Escola Municipal Dinarte Marinho</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Turno</label>
+                <p class="text-gray-800 font-medium">Matutino</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-600 mb-1">Ano Letivo</label>
+                <p class="text-gray-800 font-medium">2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna Direita - Ações e Estatísticas -->
+      <div class="space-y-6">
+        <!-- Ações Rápidas -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+          <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center space-x-2">
+            <i class="fas fa-bolt text-yellow-500"></i>
+            <span>Ações Rápidas</span>
+          </h2>
+          
+          <div class="space-y-3">
+            <button class="w-full flex items-center space-x-3 px-4 py-3 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">
+              <i class="fas fa-lock w-5 text-center"></i>
+              <span>Alterar Senha</span>
+            </button>
+            
+            <button class="w-full flex items-center space-x-3 px-4 py-3 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors">
+              <i class="fas fa-download w-5 text-center"></i>
+              <span>Exportar Dados</span>
+            </button>
+            
+            <button class="w-full flex items-center space-x-3 px-4 py-3 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100 transition-colors">
+              <i class="fas fa-print w-5 text-center"></i>
+              <span>Imprimir Perfil</span>
+            </button>
+            
+            <button class="w-full flex items-center space-x-3 px-4 py-3 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">
+              <i class="fas fa-bell-slash w-5 text-center"></i>
+              <span>Notificações</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Estatísticas de Desempenho -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+          <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center space-x-2">
+            <i class="fas fa-chart-line text-green-500"></i>
+            <span>Desempenho</span>
+          </h2>
+          
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-gray-600">Frequência</span>
+                <span class="text-sm font-bold text-green-600">96%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-green-500 h-2 rounded-full" style="width: 96%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-gray-600">Média Geral</span>
+                <span class="text-sm font-bold text-blue-600">8.7</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-500 h-2 rounded-full" style="width: 87%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-gray-600">Disciplinas</span>
+                <span class="text-sm font-bold text-purple-600">9/9</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-purple-500 h-2 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contatos Importantes -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 card-hover fade-in">
+          <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center space-x-2">
+            <i class="fas fa-address-book text-red-500"></i>
+            <span>Contatos</span>
+          </h2>
+          
+          <div class="space-y-4">
+            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-school text-blue-600"></i>
+              </div>
+              <div>
+                <p class="font-medium text-gray-800">Secretaria</p>
+                <p class="text-sm text-gray-600">(84) 3232-1234</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-user-tie text-green-600"></i>
+              </div>
+              <div>
+                <p class="font-medium text-gray-800">Coordenação</p>
+                <p class="text-sm text-gray-600">(84) 3232-5678</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-headset text-purple-600"></i>
+              </div>
+              <div>
+                <p class="font-medium text-gray-800">Suporte SIGEduc</p>
+                <p class="text-sm text-gray-600">(84) 4008-4088</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script para funcionalidades -->
+  <script>
+    // Menu lateral
+    const menuButton = document.getElementById('menuButton');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    
+    function toggleMenu() {
+      const isOpen = !sidebar.classList.contains('-translate-x-full');
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+      document.body.classList.toggle('sidebar-open', !isOpen);
+    }
+    
+    menuButton.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+    
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+        toggleMenu();
+      }
+    });
+
+    // Simular carregamento das barras de progresso
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.bg-green-500, .bg-blue-500, .bg-purple-500').forEach(bar => {
+        bar.style.transition = 'width 1s ease-in-out';
+      });
+    });
+
+    // Funcionalidade de upload de avatar
+    const avatarUpload = document.querySelector('.avatar-upload');
+    avatarUpload.addEventListener('click', function() {
+      // Aqui você implementaria a lógica de upload de imagem
+      alert('Funcionalidade de upload de foto será implementada aqui!');
+    });
+
+    // Botões de edição
+    document.querySelectorAll('button:has(.fa-edit)').forEach(button => {
+      button.addEventListener('click', function() {
+        const section = this.closest('.bg-white').querySelector('h2').textContent;
+        alert(`Editando: ${section}`);
+        // Aqui você implementaria a lógica de edição do formulário
+      });
+    });
+
+    // Ações rápidas
+    document.querySelectorAll('.bg-blue-50, .bg-green-50, .bg-purple-50, .bg-red-50').forEach(button => {
+      button.addEventListener('click', function() {
+        const action = this.querySelector('span').textContent;
+        alert(`Executando: ${action}`);
+        // Aqui você implementaria a lógica de cada ação
+      });
+    });
+  </script>
+</body>
+</html>
