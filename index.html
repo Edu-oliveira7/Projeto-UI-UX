@@ -1,468 +1,231 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIGEduc - Início</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://kit.fontawesome.com/a2e0ad6c58.js" crossorigin="anonymous"></script>
-  <style>
-    .card-hover {
-      transition: all 0.3s ease;
-    }
-    .card-hover:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-    .notification-badge {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #EF4444;
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: bold;
-    }
-    .sidebar-open {
-      overflow: hidden;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade-in {
-      animation: fadeIn 0.5s ease-out;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SIGEduc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a2e0ad6c58.js" crossorigin="anonymous"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+        }
+        .input-focus:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-gray-100 font-sans min-h-screen">
 
-  <!-- Header -->
-  <header class="bg-white shadow-sm border-b">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-4">
-        <div class="flex items-center space-x-4">
-          <!-- Botão hamburguer -->
-          <button id="menuButton" class="text-gray-600 hover:text-blue-600 focus:outline-none transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-
-          <!-- Logo -->
-          <div class="flex items-center">
-            <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-40 object-contain">
-          </div>
-        </div>
-
-        <div class="flex items-center space-x-4">
-          <!-- Notificações -->
-          <div class="relative">
-            <button class="text-gray-500 hover:text-blue-600 transition-colors p-2 rounded-full hover:bg-blue-50">
-              <i class="fas fa-bell text-xl"></i>
-              <span class="notification-badge">2</span>
-            </button>
-          </div>
-          
-          <!-- Perfil do Aluno -->
-          <div class="flex items-center space-x-3">
-            <div class="text-right hidden sm:block">
-              <p class="text-sm text-gray-600">Olá, <span class="font-medium">Milleny Jamily</span></p>
-              <p class="text-xs text-gray-500">9º Ano - Matutino</p>
-            </div>
-            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
-              MJ
-            </div>
-            <a href="login.html" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
-              Sair
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Menu lateral (oculto por padrão) -->
-  <aside id="sidebar" class="fixed top-0 left-0 w-80 h-full bg-white shadow-xl transform -translate-x-full transition-transform duration-300 z-20">
-    <div class="p-6 h-full flex flex-col">
-      <!-- Usuário -->
-      <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 mb-6 rounded-xl flex items-center space-x-3">
-        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-          <i class="fas fa-user text-xl"></i>
-        </div>
-        <div>
-          <h3 class="font-bold">Milleny Jamily</h3>
-          <p class="text-sm opacity-90">9º Ano - Escola Municipal Dinarte Marinho</p>
-        </div>
-      </div>
-
-      <h2 class="text-xl font-bold mb-6 text-gray-800 border-b pb-2">Menu Principal</h2>
-      
-      <!-- Botão Buscar -->
-      <div class="mb-6 relative">
-        <input type="text" placeholder="Buscar..." class="w-full px-4 py-3 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
-        <i class="fas fa-search absolute right-4 top-3.5 text-gray-400"></i>
-      </div>
-      
-      <nav class="flex-1">
-        <ul class="space-y-2">
-          <li>
-            <a href="index.html" class="flex items-center space-x-3 px-4 py-3 bg-blue-50 text-blue-600 rounded-lg font-medium">
-              <i class="fas fa-home w-5 text-center"></i>
-              <span>Início</span>
-            </a>
-          </li>
-          <li>
-            <details class="group" open>
-              <summary class="flex justify-between items-center cursor-pointer px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-                <div class="flex items-center space-x-3">
-                  <i class="fas fa-graduation-cap w-5 text-center"></i>
-                  <span class="font-medium">Ensino</span>
-                </div>
-                <svg class="w-4 h-4 transition-transform group-open:rotate-180 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </summary>
-              <ul class="ml-8 mt-2 space-y-2">
-                <li><a href="boletim.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Boletim</a></li>
-                <li><a href="historico.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Histórico</a></li>
-                <li><a href="disciplinas.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Minhas Disciplinas</a></li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <details class="group">
-              <summary class="flex justify-between items-center cursor-pointer px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-                <div class="flex items-center space-x-3">
-                  <i class="fas fa-concierge-bell w-5 text-center"></i>
-                  <span class="font-medium">Serviços</span>
-                </div>
-                <svg class="w-4 h-4 transition-transform group-open:rotate-180 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </summary>
-              <ul class="ml-8 mt-2 space-y-2">
-                <li><a href="solicitacoes.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Solicitações</a></li>
-                <li><a href="atestado.html" class="block px-4 py-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">Atestados</a></li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a href="mensagens.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-              <i class="fas fa-envelope w-5 text-center"></i>
-              <span class="font-medium">Caixa de Mensagens</span>
-              <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">2</span>
-            </a>
-          </li>
-          <!-- Nova Opção: Meu Perfil -->
-          <li>
-            <a href="perfil.html" class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-              <i class="fas fa-user-circle w-5 text-center"></i>
-              <span class="font-medium">Meu Perfil</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      
-      <!-- Botão Sair -->
-      <button class="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white px-6 py-3 rounded-lg text-center hover:from-gray-700 hover:to-gray-800 transition-all mt-6 font-medium flex items-center justify-center space-x-2">
-        <i class="fas fa-sign-out-alt"></i>
-        <a href="login.html">Sair do Sistema</a>
-      </button>
-    </div>
-  </aside>
-
-  <!-- Overlay para fechar menu -->
-  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-10 hidden"></div>
-
-  <!-- Conteúdo principal -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Cabeçalho de boas-vindas -->
-    <div class="text-center mb-12 fade-in">
-      <h1 class="text-4xl font-bold text-gray-800 mb-4">Olá, <span class="text-blue-600">Milleny Jamily</span>!</h1>
-      <p class="text-xl text-gray-600 mb-2">Bem-vindo de volta ao <span class="font-semibold text-blue-700">SIGEduc</span></p>
-      <div class="inline-flex items-center space-x-4 bg-white rounded-full px-6 py-3 shadow-sm">
-        <span class="text-gray-700 font-medium">
-          <i class="far fa-calendar-alt mr-2 text-blue-500"></i>
-          Segunda-feira, 11/08/2025
-        </span>
-        <span class="w-1 h-6 bg-gray-300"></span>
-        <span class="text-red-500 font-medium">
-          <i class="fas fa-bell mr-2"></i>
-          2 novas mensagens
-        </span>
-      </div>
-    </div>
-
-    <!-- Cards de Acesso Rápido -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-      <!-- Card Boletim -->
-      <a href="boletim.html" class="bg-white rounded-2xl shadow-md card-hover overflow-hidden border border-gray-100 fade-in block">
-        <div class="p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-xl font-bold text-gray-800">Boletim</h3>
-            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-              <i class="fas fa-chart-bar text-blue-600 text-xl"></i>
-            </div>
-          </div>
-          <p class="text-gray-600 mb-6">Acompanhe suas notas e desempenho escolar</p>
-          <div class="w-full bg-blue-500 hover:bg-blue-600 text-white text-center py-3 rounded-lg font-medium transition-colors">
-            Ver Boletim
-          </div>
-        </div>
-        <div class="bg-blue-50 px-6 py-3 border-t border-blue-100">
-          <p class="text-sm text-blue-700 flex items-center">
-            <i class="fas fa-info-circle mr-2"></i>
-            Última atualização: 10/08/2025
-          </p>
-        </div>
-      </a>
-
-      <!-- Card Mensagens -->
-      <a href="mensagens.html" class="bg-white rounded-2xl shadow-md card-hover overflow-hidden border border-gray-100 fade-in block">
-        <div class="p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-xl font-bold text-gray-800">Mensagens</h3>
-            <div class="relative">
-              <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                <i class="fas fa-envelope text-red-600 text-xl"></i>
-              </div>
-              <span class="notification-badge">2</span>
-            </div>
-          </div>
-          <p class="text-gray-600 mb-6">Você tem 2 novas mensagens não lidas</p>
-          <div class="w-full bg-red-500 hover:bg-red-600 text-white text-center py-3 rounded-lg font-medium transition-colors">
-            Ver Mensagens
-          </div>
-        </div>
-        <div class="bg-red-50 px-6 py-3 border-t border-red-100">
-          <p class="text-sm text-red-700 flex items-center">
-            <i class="fas fa-clock mr-2"></i>
-            1 mensagem urgente
-          </p>
-        </div>
-      </a>
-
-      <!-- Card Disciplinas -->
-      <a href="disciplinas.html" class="bg-white rounded-2xl shadow-md card-hover overflow-hidden border border-gray-100 fade-in block">
-        <div class="p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-xl font-bold text-gray-800">Disciplinas</h3>
-            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-              <i class="fas fa-book text-green-600 text-xl"></i>
-            </div>
-          </div>
-          <p class="text-gray-600 mb-6">Acesse conteúdos e atividades das matérias</p>
-          <div class="w-full bg-green-500 hover:bg-green-600 text-white text-center py-3 rounded-lg font-medium transition-colors">
-            Ver Disciplinas
-          </div>
-        </div>
-        <div class="bg-green-50 px-6 py-3 border-t border-green-100">
-          <p class="text-sm text-green-700 flex items-center">
-            <i class="fas fa-tasks mr-2"></i>
-            3 atividades pendentes
-          </p>
-        </div>
-      </a>
-
-      <!-- Card Meu Perfil -->
-      <a href="perfil.html" class="bg-white rounded-2xl shadow-md card-hover overflow-hidden border border-gray-100 fade-in block">
-        <div class="p-6">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-xl font-bold text-gray-800">Meu Perfil</h3>
-            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-              <i class="fas fa-user-circle text-purple-600 text-xl"></i>
-            </div>
-          </div>
-          <p class="text-gray-600 mb-6">Gerencie seus dados pessoais e acadêmicos</p>
-          <div class="w-full bg-purple-500 hover:bg-purple-600 text-white text-center py-3 rounded-lg font-medium transition-colors">
-            Ver Perfil
-          </div>
-        </div>
-        <div class="bg-purple-50 px-6 py-3 border-t border-purple-100">
-          <p class="text-sm text-purple-700 flex items-center">
-            <i class="fas fa-user-edit mr-2"></i>
-            Dados atualizados
-          </p>
-        </div>
-      </a>
-    </div>
-
-    <!-- Grid de Informações -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-      <!-- Próximas Atividades -->
-      <div class="bg-white rounded-2xl shadow-md overflow-hidden fade-in lg:col-span-2">
-        <div class="px-6 py-4 border-b border-gray-200">
-          <h2 class="text-xl font-bold text-gray-800 flex items-center">
-            <i class="fas fa-calendar-day text-blue-500 mr-3"></i>
-            Próximas Atividades
-          </h2>
-        </div>
-        <div class="p-6">
-          <div class="space-y-4">
-            <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg border border-blue-100">
-              <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white">
-                  <i class="fas fa-file-alt"></i>
-                </div>
-                <div>
-                  <h4 class="font-semibold text-gray-800">Prova de Matemática</h4>
-                  <p class="text-sm text-gray-600">Conteúdo: Álgebra e Geometria</p>
-                </div>
-              </div>
-              <div class="text-right">
-                <p class="font-medium text-gray-800">12/08/2025</p>
-                <p class="text-sm text-gray-600">3 dias restantes</p>
-              </div>
-            </div>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <!-- Container Principal -->
+    <div class="w-full max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden card-hover">
+        <div class="flex flex-col md:flex-row">
             
-            <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border border-yellow-100">
-              <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center text-white">
-                  <i class="fas fa-book"></i>
+            <!-- Lado Esquerdo - Formulário -->
+            <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                <!-- Logo -->
+                <div class="mb-8 text-center md:text-left">
+                    <img src="img/Group 18.png" alt="Logo SIGEduc" class="w-48 mx-auto md:mx-0">
                 </div>
-                <div>
-                  <h4 class="font-semibold text-gray-800">Trabalho de História</h4>
-                  <p class="text-sm text-gray-600">Brasil República - Entrega em grupo</p>
+
+                <!-- Saudação -->
+                <div class="mb-8 text-center md:text-left">
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+                        Olá! <span class="inline-block animate-wiggle">👋</span>
+                    </h1>
+                    <p class="text-gray-600 text-lg">Use suas credenciais para acessar o sistema</p>
                 </div>
-              </div>
-              <div class="text-right">
-                <p class="font-medium text-gray-800">15/08/2025</p>
-                <p class="text-sm text-gray-600">6 dias restantes</p>
-              </div>
+
+                <!-- Formulário -->
+                <form id="loginForm" class="space-y-6">
+                    <!-- Campo Usuário -->
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-user text-gray-400"></i>
+                        </div>
+                        <input 
+                            type="text" 
+                            placeholder="Usuário" 
+                            required
+                            class="w-full pl-10 pr-4 py-4 border border-gray-300 rounded-xl focus:outline-none input-focus transition-all duration-200"
+                        >
+                    </div>
+
+                    <!-- Campo Senha -->
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <input 
+                            id="senha" 
+                            type="password" 
+                            placeholder="Senha" 
+                            required
+                            class="w-full pl-10 pr-12 py-4 border border-gray-300 rounded-xl focus:outline-none input-focus transition-all duration-200"
+                        >
+                        <button 
+                            type="button" 
+                            id="toggleSenha" 
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+                        >
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <!-- Lembrar e Esqueci Senha -->
+                    <div class="flex justify-between items-center">
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" class="rounded text-blue-600 focus:ring-blue-500">
+                            <span class="text-gray-700 text-sm">Lembrar usuário</span>
+                        </label>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+                            Esqueci a senha
+                        </a>
+                    </div>
+
+                    <!-- Botão Entrar -->
+                    <button 
+                        type="submit"
+                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                    >
+                        <span>Entrar no Sistema</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <!-- Mensagem de Carregamento -->
+                    <div id="loadingMessage" class="hidden text-center py-4">
+                        <div class="inline-flex items-center space-x-2 text-blue-600">
+                            <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                            <span>Autenticando...</span>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Informações de Suporte -->
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <div class="text-center text-sm text-gray-500">
+                        <p class="flex items-center justify-center space-x-1">
+                            <i class="fas fa-headset"></i>
+                            <span>Suporte: (84) 4008-4088 - Opção 1</span>
+                        </p>
+                        <p class="mt-1">SIGEduc | GPD/SEEC</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-100">
-              <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center text-white">
-                  <i class="fas fa-flask"></i>
+            <!-- Lado Direito - Banner -->
+            <div class="w-full md:w-1/2 gradient-bg text-white p-8 md:p-12 flex flex-col justify-between relative overflow-hidden">
+                <!-- Overlay decorativo -->
+                <div class="absolute inset-0 opacity-10">
+                    <div class="absolute top-10 right-10 w-32 h-32 bg-white rounded-full"></div>
+                    <div class="absolute bottom-20 left-20 w-24 h-24 bg-white rounded-full"></div>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white rounded-full"></div>
                 </div>
-                <div>
-                  <h4 class="font-semibold text-gray-800">Experimento de Ciências</h4>
-                  <p class="text-sm text-gray-600">Relatório do experimento sobre fotossíntese</p>
+
+                <!-- Conteúdo do Banner -->
+                <div class="relative z-10">
+                    <div class="mb-8 flex justify-center">
+                        <div class="w-48 h-48 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/30">
+                            <i class="fas fa-graduation-cap text-white text-6xl"></i>
+                        </div>
+                    </div>
+
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                            Bem-vindo ao <span class="block">SIGEduc</span>
+                        </h2>
+                        <p class="text-blue-100 text-lg leading-relaxed max-w-md mx-auto">
+                            Sistema Integrado de Gestão da Educação do Rio Grande do Norte
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle text-green-300"></i>
+                            <span class="text-sm">Boletim Online</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle text-green-300"></i>
+                            <span class="text-sm">Histórico Escolar</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle text-green-300"></i>
+                            <span class="text-sm">Mensagens</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle text-green-300"></i>
+                            <span class="text-sm">Disciplinas</span>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="text-right">
-                <p class="font-medium text-gray-800">18/08/2025</p>
-                <p class="text-sm text-gray-600">9 dias restantes</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="mt-6 text-center">
-            <a href="disciplinas.html" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
-              <span>Ver todas as atividades</span>
-              <i class="fas fa-chevron-right ml-2 text-sm"></i>
-            </a>
-          </div>
-        </div>
-      </div>
 
-      <!-- Informações Rápidas -->
-      <div class="space-y-6">
-        <!-- Resumo Acadêmico -->
-        <div class="bg-white rounded-2xl shadow-md p-6 fade-in">
-          <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-            <i class="fas fa-graduation-cap text-green-500 mr-2"></i>
-            Resumo Acadêmico
-          </h3>
-          <div class="space-y-4">
-            <div class="flex justify-between items-center">
-              <span class="text-gray-600">Média Geral</span>
-              <span class="font-bold text-blue-600">8.7</span>
+                <div class="relative z-10 text-center">
+                    <div class="mb-6">
+                        <img src="img/Brasão_do_Rio_Grande_do_Norte.svg.png" 
+                             alt="Brasão RN" 
+                             class="w-16 mx-auto mb-3 opacity-90">
+                        <h3 class="text-4xl font-bold">
+                            RN <span class="font-light">SEEC</span>
+                        </h3>
+                        <p class="text-blue-100 text-sm mt-2">
+                            SECRETARIA DE ESTADO DA EDUCAÇÃO, DO ESPORTE E DO LAZER - SEEC
+                        </p>
+                    </div>
+                    
+                    <div class="bg-black/20 rounded-lg p-3 backdrop-blur-sm">
+                        <p class="text-xs text-blue-200">
+                            SIGEduc v20251020_1709
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="flex justify-between items-center">
-              <span class="text-gray-600">Frequência</span>
-              <span class="font-bold text-green-600">96%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-gray-600">Disciplinas</span>
-              <span class="font-bold text-purple-600">9</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-gray-600">Situação</span>
-              <span class="font-bold text-green-600">Aprovado</span>
-            </div>
-          </div>
-          <a href="boletim.html" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-center py-2 rounded-lg font-medium transition-colors block mt-4">
-            Ver Detalhes
-          </a>
         </div>
-
-        <!-- Avisos Importantes -->
-        <div class="bg-white rounded-2xl shadow-md p-6 fade-in">
-          <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-            <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
-            Avisos Importantes
-          </h3>
-          <div class="space-y-3">
-            <div class="flex items-start space-x-2">
-              <i class="fas fa-circle text-red-500 text-xs mt-1"></i>
-              <p class="text-sm text-gray-700">Reunião de pais dia 25/08 às 14h</p>
-            </div>
-            <div class="flex items-start space-x-2">
-              <i class="fas fa-circle text-yellow-500 text-xs mt-1"></i>
-              <p class="text-sm text-gray-700">Período de rematrícula: 01/09 a 15/09</p>
-            </div>
-            <div class="flex items-start space-x-2">
-              <i class="fas fa-circle text-blue-500 text-xs mt-1"></i>
-              <p class="text-sm text-gray-700">Feriado municipal: 07/09 - Independência</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
-  </main>
+    <!-- Script -->
+    <script>
+        const senha = document.getElementById("senha");
+        const toggleSenha = document.getElementById("toggleSenha");
+        
+        toggleSenha.addEventListener("click", () => {
+            const type = senha.getAttribute("type") === "password" ? "text" : "password";
+            senha.setAttribute("type", type);
+            toggleSenha.innerHTML = type === "password" ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
 
-  <!-- Script para funcionalidades -->
-  <script>
-    // Menu lateral
-    const menuButton = document.getElementById('menuButton');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    
-    function toggleMenu() {
-      const isOpen = !sidebar.classList.contains('-translate-x-full');
-      sidebar.classList.toggle('-translate-x-full');
-      overlay.classList.toggle('hidden');
-      document.body.classList.toggle('sidebar-open', !isOpen);
-    }
-    
-    menuButton.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', toggleMenu);
-    
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
-        toggleMenu();
-      }
-    });
+        const loginForm = document.getElementById("loginForm");
+        const loadingMessage = document.getElementById("loadingMessage");
 
-    // Atualizar data atual
-    function updateCurrentDate() {
-      const now = new Date();
-      const options = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'numeric', 
-        day: 'numeric' 
-      };
-      const dateElement = document.querySelector('.fa-calendar-alt').parentElement;
-      dateElement.innerHTML = `<i class="far fa-calendar-alt mr-2 text-blue-500"></i>${now.toLocaleDateString('pt-BR', options)}`;
-    }
+        loginForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            loadingMessage.classList.remove("hidden");
 
-    // Inicializar
-    document.addEventListener('DOMContentLoaded', function() {
-      updateCurrentDate();
-    });
-  </script>
+            setTimeout(() => {
+                window.location.href = "inicio.html";  // REDIRECIONA PARA inicio.html
+            }, 1500);
+        });
 
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('ring-2', 'ring-blue-500', 'ring-opacity-50');
+                this.parentElement.classList.remove('border-gray-300');
+                this.parentElement.classList.add('border-blue-500');
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('ring-2', 'ring-blue-500', 'ring-opacity-50');
+                this.parentElement.classList.remove('border-blue-500');
+                this.parentElement.classList.add('border-gray-300');
+            });
+        });
+    </script>
 </body>
 </html>
